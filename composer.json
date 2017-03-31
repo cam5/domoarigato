@@ -1,0 +1,12 @@
+{
+    "require-dev": {
+        "phpunit/phpunit": "^6.0"
+    },
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-4": {
+            "Cam5\\Domoarigato\\": "src/",
+            "Cam5\\Domoarigato\\tests\\": "tests/"
+        }
+    }
+}
