@@ -7,7 +7,7 @@ use Cam5\Domoarigato\Elements\Input;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers Input
+ * @covers Cam5\Domoarigato\Elements\Input
  */
 final class InputTest extends TestCase
 {

@@ -7,7 +7,7 @@ use Cam5\Domoarigato\Elements\Div;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers Div
+ * @covers Cam5\Domoarigato\Elements\Div
  */
 final class DivTest extends TestCase
 {

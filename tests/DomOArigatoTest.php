@@ -7,7 +7,7 @@ use Cam5\Domoarigato\DomOArigato;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers DomOArigato
+ * @covers Cam5\Domoarigato\DomOArigato
  */
 final class DomOArigatoTest extends TestCase
 {
