@@ -17,28 +17,11 @@ abstract class AbstractElement
     abstract public function getTagName();
 
     /**
-     * Generates the HTML for the tag.
+     * Output the tag's formatted HTML.
      *
      * @return string
      */
-    public function render()
-    {
-        if (true === $this->isSelfEnclosed) {
-            return sprintf(
-                '<%1$s%2$s />',
-                $this->getTagName(),
-                $this->renderAttrs()
-            );
-        }
-
-        return sprintf(
-            '<%1$s%2$s>%3$s</%1$s>',
-            $this->getTagName(),
-            $this->renderAttrs(),
-            $this->getTextContent()
-        );
-
-    }//end render()
+    abstract public function render();
 
     /**
      * Renders attributes for the tag.

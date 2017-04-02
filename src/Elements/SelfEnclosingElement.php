@@ -14,5 +14,19 @@ abstract class SelfEnclosingElement extends AbstractElement
      * @var boolean
      */
     protected $isSelfEnclosed = true;
+
+    /**
+     * Generates the HTML for the tag.
+     *
+     * @return string
+     */
+    public function render()
+    {
+        return sprintf(
+            '<%1$s%2$s />',
+            $this->getTagName(),
+            $this->renderAttrs()
+        );
+    }//end render()
 }//end class
 
