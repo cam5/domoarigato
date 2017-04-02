@@ -7,7 +7,7 @@ use Cam5\Domoarigato\Elements\Traits as Traits;
 /**
  * Represents the HTML <div> tag
  */
-class Div extends EnclosingElement
+class Div extends EnclosingElement implements ElementInterface
 {
     use Traits\BaseElement;
 
