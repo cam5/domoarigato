@@ -40,6 +40,16 @@ final class DivTest extends TestCase
             $this->div->render()
         );
     }
+
+    public function testAddingAttributes()
+    {
+        $this->div->addAttribute('id', 'lorem');
+
+        $this->assertEquals(
+            '<div id="lorem"></div>',
+            $this->div->render()
+        );
+    }
 }
 
 
