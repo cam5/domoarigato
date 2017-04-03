@@ -39,7 +39,7 @@ abstract class EnclosingElement extends AbstractElement
      *
      * @return self
      */
-    public function setTextContent(string $string)
+    public function setTextContent($string)
     {
         $this->textContent = $string;
 

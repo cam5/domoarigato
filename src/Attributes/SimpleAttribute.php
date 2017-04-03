@@ -37,7 +37,7 @@ class SimpleAttribute implements AttributeInterface
      *
      * @return self
      */
-    public function setValue(string $string)
+    public function setValue($string)
     {
         $this->value = $string;
 

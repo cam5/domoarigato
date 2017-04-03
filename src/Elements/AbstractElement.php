@@ -85,7 +85,7 @@ abstract class AbstractElement
      *
      * @return self
      */
-    public function addAttribute(string $key, string $value)
+    public function addAttribute($key, $value)
     {
         $attr = new SimpleAttribute();
 

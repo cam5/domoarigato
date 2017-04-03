@@ -23,7 +23,7 @@ abstract class AbstractAttribute
      *
      * @return self
      */
-    abstract public function setKey(string $string);
+    abstract public function setKey($string);
 
     /**
      * Get the value of a given attribute.
@@ -41,7 +41,7 @@ abstract class AbstractAttribute
      *
      * @return self
      */
-    abstract public function setValue(string $string);
+    abstract public function setValue($string);
 
     /**
      * Defines how the attribute is rendered into an HTML fragment.

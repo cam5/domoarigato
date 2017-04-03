@@ -22,7 +22,7 @@ class GenericElement extends EnclosingElement implements ElementInterface
      *
      * @return self
      */
-    public function __construct(string $tagName)
+    public function __construct($tagName)
     {
         $this->tagName = $tagName;
 

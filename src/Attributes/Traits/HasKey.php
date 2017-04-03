@@ -31,7 +31,7 @@ trait HasKey
      *
      * @return self
      */
-    public function setKey(string $string)
+    public function setKey($string)
     {
         $this->key = $string;
 

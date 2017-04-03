@@ -20,7 +20,7 @@ class ElementFactory
      *
      * @return ElementInterface
      */
-    public static function createFromName(string $name)
+    public static function createFromName($name)
     {
         if (true === Elements::contains($name)) {
             $className = Elements::get($name);

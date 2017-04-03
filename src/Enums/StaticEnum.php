@@ -24,7 +24,7 @@ class StaticEnum
      *
      * @return string The value associated with that key.
      */
-    public static function get(string $string)
+    public static function get($string)
     {
         if (true === self::contains($string)) {
             return static::$keys[$string];
@@ -40,7 +40,7 @@ class StaticEnum
      *
      * @return boolean
      */
-    public static function contains(string $string)
+    public static function contains($string)
     {
         return key_exists($string, static::$keys);
     }//end contains()
