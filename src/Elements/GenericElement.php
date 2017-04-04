@@ -36,6 +36,6 @@ class GenericElement extends EnclosingElement implements ElementInterface
      */
     public function getTagName()
     {
-        return $tagName;
+        return $this->tagName;
     }//end getTagName()
 }//end class

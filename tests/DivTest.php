@@ -1,5 +1,4 @@
 <?php
-declare(strict_types=1);
 
 namespace Cam5\Domoarigato\tests;
 
@@ -48,6 +47,17 @@ final class DivTest extends TestCase
         $this->assertEquals(
             '<div id="lorem"></div>',
             $this->div->render()
+        );
+    }
+
+    /**
+     * @covers Cam5\Domoarigato\Elements\Traits\BaseElement::getTagName
+     */
+    public function testTagName()
+    {
+        $this->assertEquals(
+            'div',
+            $this->div->getTagName()
         );
     }
 }

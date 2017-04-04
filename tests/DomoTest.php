@@ -1,5 +1,4 @@
 <?php
-declare(strict_types=1);
 
 namespace Cam5\Domoarigato\tests;
 
@@ -14,6 +13,9 @@ use PHPUnit\Framework\TestCase;
  */
 final class DomoTest extends TestCase
 {
+    /**
+     * @covers Cam5\Domoarigato\Factories\ElementFactory::createFromName
+     */
     public function testCreatesADivByName()
     {
         $this->assertInstanceOf(
@@ -22,6 +24,9 @@ final class DomoTest extends TestCase
         );
     }
 
+    /**
+     * @covers Cam5\Domoarigato\Factories\ElementFactory::createFromName
+     */
     public function testCreatesGenericElementByName()
     {
         $this->assertInstanceOf(
@@ -30,6 +35,9 @@ final class DomoTest extends TestCase
         );
     }
 
+    /**
+     * @covers Cam5\Domoarigato\Factories\ElementFactory::createFromName
+     */
     public function testCreatesElementsConformingToACommonInterface()
     {
         $this->assertInstanceOf(
