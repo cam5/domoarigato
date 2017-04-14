@@ -2,6 +2,7 @@
 
 namespace Cam5\Domoarigato\Elements;
 
+use Cam5\Domoarigato\Factories\AttributeFactory;
 use Cam5\Domoarigato\Attributes\SimpleAttribute;
 use Cam5\Domoarigato\Attributes\AttributeInterface;
 
@@ -87,10 +88,9 @@ abstract class AbstractElement
      */
     public function addAttribute($key, $value)
     {
-        $attr = new SimpleAttribute();
+        $attr = AttributeFactory::createFromName($key);
 
-        $attr->setKey($key)
-            ->setValue($value);
+        $attr->setValue($value);
 
         $this->attributes[$key] = $attr;
 

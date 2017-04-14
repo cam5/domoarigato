@@ -40,6 +40,9 @@ final class DivTest extends TestCase
         );
     }
 
+    /**
+     * @covers Cam5\Domoarigato\Factories\AttributeFactory::createFromName
+     */
     public function testAddingAttributes()
     {
         $this->div->addAttribute('id', 'lorem');
