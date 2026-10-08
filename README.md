@@ -475,11 +475,85 @@ echo count($link()->validate()), ' on its own';
 0 on its own
 ```
 
-What is checked is whether each node may be a direct child of its parent.
+### Rules that reach further than parent and child
+
+Some of HTML's rules are about what is anywhere *inside* an element, and these
+are the ones browsers punish hardest: a link inside a link is split in two, and
+a form inside a form is thrown away along with its fields.
+
+```php
+use Cam5\Domoarigato\Domo;
+
+$card = Domo::createElement('a', ['href' => '/product'], [
+    Domo::createElement('h3', [], 'Teapot'),
+    Domo::createElement('p', [], [
+        'In stock. ',
+        Domo::createElement('button', [], 'Add to basket'),
+    ]),
+]);
+
+foreach (Domo::createElement('li', [], $card)->validate() as $violation) {
+    echo $violation, "\n";
+}
+```
+
+```html
+li > a > p > button: <button> is interactive content, which is not allowed anywhere inside of <a>.
+```
+
+The same goes for a `<label>` in a `<label>`, a `<header>` or `<footer>` in a
+`<header>`, headings and sections in an `<address>`, `<dt>` or `<th>`, a
+`<table>` in a `<caption>`, and media inside media. Whether something counts
+as interactive follows its attributes: an `<a>` without `href` or an
+`<input type="hidden">` is not. `<main>` and `<area>` work the other way
+round, and are checked for having the right ancestors.
+
+### How many, and in what order
+
+A list of allowed children cannot say "exactly one" or "this one first", so
+those rules are checked separately.
+
+```php
+use Cam5\Domoarigato\Domo;
+
+$page = Domo::createElement('html', [], [
+    Domo::createElement('head', [], Domo::createElement('meta', ['charset' => 'utf-8'])),
+    Domo::createElement('body', [], [
+        Domo::createElement('table', [], [
+            Domo::createElement('tbody', [], Domo::createElement('tr', [], Domo::createElement('td', [], '1'))),
+            Domo::createElement('thead', [], Domo::createElement('tr', [], Domo::createElement('th', [], 'Qty'))),
+        ]),
+        Domo::createElement('details', [], [
+            Domo::createElement('p', [], 'Hidden until opened'),
+            Domo::createElement('summary', [], 'More'),
+        ]),
+        Domo::createElement('dl', [], Domo::createElement('dt', [], 'A term with no description')),
+    ]),
+]);
+
+foreach ($page->validate() as $violation) {
+    echo $violation, "\n";
+}
+```
+
+```html
+html > head: <head> is missing its <title>.
+html > body > table > thead: <thead> must come before <tbody> inside of <table>.
+html > body > details > summary: <summary> must be the first element inside of <details>.
+html > body > dl: Inside of <dl>, every group must be one or more <dt> followed by one or more <dd>.
+```
+
+Structure is checked for `html`, `head`, `table`, `details`, `fieldset`,
+`figure`, `picture`, `hgroup`, `audio`, `video`, `colgroup` and `dl`.
+
+What all of this checks is how elements are nested and arranged.
 Three things are deliberately left alone: markup passed in as a string
 (`setInnerHtml()`, `Domo::raw()`), which is not parsed; the insides of `<svg>`,
 `<math>` and `<template>`, where HTML's rules do not apply; and an element with
 no parent to judge it by, such as the root of the tree you are validating.
+Attribute values are not validated, so this is not a replacement for a full
+conformance checker, but it catches the nesting mistakes that change how a
+page is parsed.
 
 ## Attributes
 

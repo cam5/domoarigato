@@ -126,7 +126,7 @@ final class ValidatorTest extends TestCase
                     ])
                 ),
             ],
-            'noscript in head'            => [fn () => $e('head', $e('noscript', [$e('link'), $e('style'), $e('meta')]))],
+            'noscript in head'            => [fn () => $e('head', [$e('title', 't'), $e('noscript', [$e('link'), $e('style'), $e('meta')])])],
             'noscript in body'            => [fn () => $e('div', $e('noscript', $e('p', 'Enable JavaScript')))],
             'noscript in a paragraph'     => [fn () => $e('p', $e('noscript', $e('em', 'x')))],
             'link in body with itemprop'  => [fn () => $e('div', $e('link', null, ['itemprop' => 'url']))],
@@ -153,7 +153,7 @@ final class ValidatorTest extends TestCase
             'empty iframe'                => [fn () => $e('iframe', [' ', Domo::comment('x')])],
             'object with fallback'        => [fn () => $e('div', $e('object', $e('p', 'fallback')))],
             'canvas slot in phrasing'     => [fn () => $e('p', [$e('canvas', $e('em')), $e('slot', 'x')])],
-            'main and area anywhere'      => [fn () => $e('div', [$e('main'), $e('area')])],
+            'main, and area in a map'     => [fn () => $e('div', [$e('main'), $e('map', $e('area'))])],
         ];
     }//end validTrees()
 
@@ -245,7 +245,7 @@ final class ValidatorTest extends TestCase
                 ['div > body: <body> is not allowed directly inside of <div>. Allowed there: flow content.'],
             ],
             'div in html'                 => [
-                fn () => $e('html', [$e('head'), $e('div')]),
+                fn () => $e('html', [$e('head', $e('title', 't')), $e('div')]),
                 ['html > div: <div> is not allowed directly inside of <html>. Allowed there: <head>, <body>.'],
             ],
             'paragraph in head'           => [
@@ -278,14 +278,14 @@ final class ValidatorTest extends TestCase
                 ['rp > b: <b> is not allowed directly inside of <rp>. Allowed there: text.'],
             ],
             'paragraph in noscript in head' => [
-                fn () => $e('head', $e('noscript', [$e('meta'), $e('p'), 'x'])),
+                fn () => $e('head', [$e('title', 't'), $e('noscript', [$e('meta'), $e('p'), 'x'])]),
                 [
                     'head > noscript > p: <p> is not allowed directly inside of <noscript>. Allowed there: <link>, <style>, <meta>.',
                     'head > noscript > (text): Text is not allowed directly inside of <noscript>. Allowed there: <link>, <style>, <meta>.',
                 ],
             ],
             'paragraph in a div in a dl'  => [
-                fn () => $e('dl', $e('div', [$e('dt'), $e('p'), 'x'])),
+                fn () => $e('dl', $e('div', [$e('dt'), $e('dd'), $e('p'), 'x'])),
                 [
                     'dl > div > p: <p> is not allowed directly inside of <div>. Allowed there: <dt>, <dd>, script-supporting elements.',
                     'dl > div > (text): Text is not allowed directly inside of <div>. Allowed there: <dt>, <dd>, script-supporting elements.',
@@ -528,9 +528,9 @@ final class ValidatorTest extends TestCase
      */
     public function testFragmentsValidateOnRender(): void
     {
-        $good = Domo::fragment(Domo::doctype(), self::el('html', [self::el('head'), self::el('body')]));
+        $good = Domo::fragment(Domo::doctype(), self::el('html', [self::el('head', self::el('title', 'T')), self::el('body')]));
 
-        $this->assertSame('<!DOCTYPE html><html><head></head><body></body></html>', $good->render(true));
+        $this->assertSame('<!DOCTYPE html><html><head><title>T</title></head><body></body></html>', $good->render(true));
         $this->assertSame([], $good->validate());
 
         $bad = Domo::fragment(self::el('ul', 'x'));
@@ -613,6 +613,7 @@ final class ValidatorTest extends TestCase
                 $found = array_filter(
                     $root->validate(),
                     fn (Violation $violation) => $violation->getNode() === $child
+                        && true === str_contains($violation->getMessage(), 'directly inside of')
                 );
 
                 $this->assertSame($allowed, ([] === $found), '<'.$childName.'> inside of <'.$parentName.'>');

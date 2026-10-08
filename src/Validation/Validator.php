@@ -19,6 +19,10 @@ use Cam5\Domoarigato\Nodes\Text;
 /**
  * Checks a tree of nodes against HTML's rules for what may go inside of what.
  *
+ * Three kinds of rule are applied: what each element may hold directly (`ContentModels`), what
+ * it may not have anywhere beneath it (`AncestorRules`), and how many of its children there
+ * may be and in what order (`StructureRules`).
+ *
  * Markup that was passed in as a string (`RawHtml`) isn't parsed, and so isn't checked. Neither
  * is anything inside of an <svg>, a <math> or a <template>, where HTML's rules don't apply.
  */
@@ -84,9 +88,18 @@ class Validator
             return;
         }
 
-        $ancestors[] = $element;
+        $parent    = end($ancestors);
+        $isGroup   = (false !== $parent && Elements::DIV === $element->getTagName() && Elements::DL === $parent->getTagName());
+        $problems  = (true === $isGroup) ? StructureRules::checkGroup($element) : StructureRules::check($element);
+        $inside    = array_merge($ancestors, [$element]);
 
-        self::checkChildren($element, $ancestors, $model, $violations);
+        foreach ($problems as [$node, $problem]) {
+            $path = ($node === $element) ? self::path($ancestors, $node) : self::path($inside, $node);
+
+            $violations[] = new Violation($node, $path, $problem);
+        }
+
+        self::checkChildren($element, $inside, $model, $violations);
     }//end checkElement()
 
     /**
@@ -120,6 +133,12 @@ class Validator
             }
 
             if ($child instanceof ElementInterface) {
+                $problem = AncestorRules::problemWith($child, $ancestors);
+
+                if (null !== $problem) {
+                    $violations[] = new Violation($child, self::path($ancestors, $child), $problem);
+                }
+
                 self::checkElement($child, $ancestors, $violations);
             }
         }
