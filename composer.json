@@ -1,4 +1,30 @@
 {
+    "name": "cam5/domoarigato",
+    "description": "Build HTML in PHP with elements and attributes as objects: escaped by default, every HTML5 element and attribute, and optional content validation.",
+    "type": "library",
+    "keywords": [
+        "html",
+        "html5",
+        "dom",
+        "builder",
+        "elements",
+        "attributes",
+        "escaping",
+        "xss",
+        "validation"
+    ],
+    "homepage": "https://github.com/cam5/domoarigato",
+    "license": "GPL-3.0-or-later",
+    "authors": [
+        {
+            "name": "Cameron Hurd",
+            "homepage": "https://github.com/cam5"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/cam5/domoarigato/issues",
+        "source": "https://github.com/cam5/domoarigato"
+    },
     "require": {
         "php": "^8.2"
     },
@@ -10,7 +36,11 @@
     "prefer-stable": true,
     "autoload": {
         "psr-4": {
-            "Cam5\\Domoarigato\\": "src/",
+            "Cam5\\Domoarigato\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
             "Cam5\\Domoarigato\\tests\\": "tests/"
         }
     },

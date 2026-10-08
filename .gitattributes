@@ -1,0 +1,9 @@
+# Keep what only matters for working on the library out of the archives that Composer downloads.
+/.github            export-ignore
+/bin                export-ignore
+/tests              export-ignore
+/.gitattributes     export-ignore
+/.gitignore         export-ignore
+/composer.lock      export-ignore
+/infection.json5    export-ignore
+/phpunit.xml.dist   export-ignore
