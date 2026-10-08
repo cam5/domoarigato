@@ -1,0 +1,565 @@
+{
+  "source": "https://html.spec.whatwg.org/multipage/indices.html",
+  "retrieved": "2026-10-07",
+  "attributes": {
+    "abbr": [
+      "Text*"
+    ],
+    "accept": [
+      "Set of comma-separated tokens* consisting of valid MIME type strings with no parameters or audio/*, video/*, or image/*"
+    ],
+    "accept-charset": [
+      "ASCII case-insensitive match for \"UTF-8\""
+    ],
+    "accesskey": [
+      "Ordered set of unique space-separated tokens, none of which are identical to another, each consisting of one code point in length"
+    ],
+    "action": [
+      "Valid non-empty URL potentially surrounded by spaces"
+    ],
+    "allow": [
+      "Serialized permissions policy"
+    ],
+    "allowfullscreen": [
+      "Boolean attribute"
+    ],
+    "alpha": [
+      "Boolean attribute"
+    ],
+    "alt": [
+      "Text*"
+    ],
+    "as": [
+      "Preload destination, for rel=\"preload\"; module preload destination, for rel=\"modulepreload\""
+    ],
+    "async": [
+      "Boolean attribute"
+    ],
+    "autocapitalize": [
+      "\"on\"; \"off\"; \"none\"; \"sentences\"; \"words\"; \"characters\""
+    ],
+    "autocomplete": [
+      "\"on\"; \"off\"",
+      "Autofill field name and related tokens*"
+    ],
+    "autocorrect": [
+      "\"on\"; \"off\"; the empty string"
+    ],
+    "autofocus": [
+      "Boolean attribute"
+    ],
+    "autoplay": [
+      "Boolean attribute"
+    ],
+    "blocking": [
+      "Unordered set of unique space-separated tokens*"
+    ],
+    "charset": [
+      "\"utf-8\""
+    ],
+    "checked": [
+      "Boolean attribute"
+    ],
+    "cite": [
+      "Valid URL potentially surrounded by spaces"
+    ],
+    "class": [
+      "Set of space-separated tokens"
+    ],
+    "closedby": [
+      "\"any\"; \"closerequest\"; \"none\";"
+    ],
+    "color": [
+      "CSS <color>"
+    ],
+    "colorspace": [
+      "\"limited-srgb\"; \"display-p3\""
+    ],
+    "cols": [
+      "Valid non-negative integer greater than zero"
+    ],
+    "colspan": [
+      "Valid non-negative integer greater than zero"
+    ],
+    "command": [
+      "\"toggle-popover\"; \"show-popover\"; \"hide-popover\"; \"close\"; \"request-close\"; \"show-modal\"; a custom command keyword"
+    ],
+    "commandfor": [
+      "ID*"
+    ],
+    "content": [
+      "Text*"
+    ],
+    "contenteditable": [
+      "\"true\"; \"false\"; \"plaintext-only\"; the empty string"
+    ],
+    "controls": [
+      "Boolean attribute"
+    ],
+    "coords": [
+      "Valid list of floating-point numbers*"
+    ],
+    "crossorigin": [
+      "\"anonymous\"; \"use-credentials\"; the empty string"
+    ],
+    "data": [
+      "Valid non-empty URL potentially surrounded by spaces"
+    ],
+    "datetime": [
+      "Valid date string with optional time",
+      "Valid month string, valid date string, valid yearless date string, valid time string, valid local date and time string, valid time-zone offset string, valid global date and time string, valid week string, valid non-negative integer, or valid duration string"
+    ],
+    "decoding": [
+      "\"sync\"; \"async\"; \"auto\""
+    ],
+    "default": [
+      "Boolean attribute"
+    ],
+    "defer": [
+      "Boolean attribute"
+    ],
+    "dir": [
+      "\"ltr\"; \"rtl\"; \"auto\"",
+      "\"ltr\"; \"rtl\""
+    ],
+    "dirname": [
+      "Text*"
+    ],
+    "disabled": [
+      "Boolean attribute",
+      "Boolean attribute",
+      "Boolean attribute"
+    ],
+    "download": [
+      "Text"
+    ],
+    "draggable": [
+      "\"true\"; \"false\""
+    ],
+    "enctype": [
+      "\"application/x-www-form-urlencoded\"; \"multipart/form-data\"; \"text/plain\""
+    ],
+    "enterkeyhint": [
+      "\"enter\"; \"done\"; \"go\"; \"next\"; \"previous\"; \"search\"; \"send\""
+    ],
+    "fetchpriority": [
+      "\"auto\"; \"high\"; \"low\""
+    ],
+    "for": [
+      "ID*",
+      "Unordered set of unique space-separated tokens consisting of IDs*",
+      "Text"
+    ],
+    "form": [
+      "ID*"
+    ],
+    "formaction": [
+      "Valid non-empty URL potentially surrounded by spaces"
+    ],
+    "formenctype": [
+      "\"application/x-www-form-urlencoded\"; \"multipart/form-data\"; \"text/plain\""
+    ],
+    "formmethod": [
+      "\"get\"; \"post\"; \"dialog\""
+    ],
+    "formnovalidate": [
+      "Boolean attribute"
+    ],
+    "formtarget": [
+      "Valid navigable target name or keyword"
+    ],
+    "headers": [
+      "Unordered set of unique space-separated tokens consisting of IDs*"
+    ],
+    "headingoffset": [
+      "Valid non-negative integer between 0 and 8"
+    ],
+    "headingreset": [
+      "Boolean attribute"
+    ],
+    "height": [
+      "Valid non-negative integer"
+    ],
+    "hidden": [
+      "\"until-found\"; \"hidden\"; the empty string"
+    ],
+    "high": [
+      "Valid floating-point number*"
+    ],
+    "href": [
+      "Valid URL potentially surrounded by spaces",
+      "Valid non-empty URL potentially surrounded by spaces",
+      "Valid URL potentially surrounded by spaces"
+    ],
+    "hreflang": [
+      "Valid BCP 47 language tag"
+    ],
+    "http-equiv": [
+      "\"content-type\"; \"default-style\"; \"refresh\"; \"x-ua-compatible\"; \"content-security-policy\""
+    ],
+    "id": [
+      "Text*"
+    ],
+    "imagesizes": [
+      "Valid source size list"
+    ],
+    "imagesrcset": [
+      "Comma-separated list of image candidate strings"
+    ],
+    "inert": [
+      "Boolean attribute"
+    ],
+    "inputmode": [
+      "\"none\"; \"text\"; \"tel\"; \"email\"; \"url\"; \"numeric\"; \"decimal\"; \"search\""
+    ],
+    "integrity": [
+      "Text"
+    ],
+    "is": [
+      "Valid custom element name of a defined customized built-in element"
+    ],
+    "ismap": [
+      "Boolean attribute"
+    ],
+    "itemid": [
+      "Valid URL potentially surrounded by spaces"
+    ],
+    "itemprop": [
+      "Unordered set of unique space-separated tokens consisting of valid absolute URLs, defined property names, or text*"
+    ],
+    "itemref": [
+      "Unordered set of unique space-separated tokens consisting of IDs*"
+    ],
+    "itemscope": [
+      "Boolean attribute"
+    ],
+    "itemtype": [
+      "Unordered set of unique space-separated tokens consisting of valid absolute URLs*"
+    ],
+    "kind": [
+      "\"subtitles\"; \"captions\"; \"descriptions\"; \"chapters\"; \"metadata\""
+    ],
+    "label": [
+      "Text"
+    ],
+    "lang": [
+      "Valid BCP 47 language tag or the empty string"
+    ],
+    "list": [
+      "ID*"
+    ],
+    "loading": [
+      "\"lazy\"; \"eager\""
+    ],
+    "loop": [
+      "Boolean attribute"
+    ],
+    "low": [
+      "Valid floating-point number*"
+    ],
+    "max": [
+      "Varies*",
+      "Valid floating-point number*"
+    ],
+    "maxlength": [
+      "Valid non-negative integer"
+    ],
+    "media": [
+      "Valid media query list"
+    ],
+    "method": [
+      "\"get\"; \"post\"; \"dialog\""
+    ],
+    "min": [
+      "Varies*",
+      "Valid floating-point number*"
+    ],
+    "minlength": [
+      "Valid non-negative integer"
+    ],
+    "multiple": [
+      "Boolean attribute"
+    ],
+    "muted": [
+      "Boolean attribute"
+    ],
+    "name": [
+      "Text*",
+      "Text*",
+      "Text*",
+      "Valid navigable target name or keyword",
+      "Text*",
+      "Text*",
+      "Text"
+    ],
+    "nomodule": [
+      "Boolean attribute"
+    ],
+    "nonce": [
+      "Text"
+    ],
+    "novalidate": [
+      "Boolean attribute"
+    ],
+    "open": [
+      "Boolean attribute",
+      "Boolean attribute"
+    ],
+    "optimum": [
+      "Valid floating-point number*"
+    ],
+    "pattern": [
+      "Regular expression matching the JavaScript Pattern production"
+    ],
+    "ping": [
+      "Set of space-separated tokens consisting of valid non-empty URLs"
+    ],
+    "placeholder": [
+      "Text*"
+    ],
+    "playsinline": [
+      "Boolean attribute"
+    ],
+    "popover": [
+      "\"auto\"; \"manual\"; \"hint\"; the empty string"
+    ],
+    "popovertarget": [
+      "ID*"
+    ],
+    "popovertargetaction": [
+      "\"toggle\"; \"show\"; \"hide\""
+    ],
+    "poster": [
+      "Valid non-empty URL potentially surrounded by spaces"
+    ],
+    "preload": [
+      "\"none\"; \"metadata\"; \"auto\"; the empty string"
+    ],
+    "readonly": [
+      "Boolean attribute",
+      "Boolean attribute"
+    ],
+    "referrerpolicy": [
+      "Referrer policy"
+    ],
+    "rel": [
+      "Unordered set of unique space-separated tokens*",
+      "Unordered set of unique space-separated tokens*"
+    ],
+    "required": [
+      "Boolean attribute"
+    ],
+    "reversed": [
+      "Boolean attribute"
+    ],
+    "rows": [
+      "Valid non-negative integer greater than zero"
+    ],
+    "rowspan": [
+      "Valid non-negative integer"
+    ],
+    "sandbox": [
+      "Unordered set of unique space-separated tokens, ASCII case-insensitive, consisting of \"allow-downloads\"\"allow-forms\"\"allow-modals\"\"allow-orientation-lock\"\"allow-pointer-lock\"\"allow-popups\"\"allow-popups-to-escape-sandbox\"\"allow-presentation\"\"allow-same-origin\"\"allow-scripts\"\"allow-top-navigation\"\"allow-top-navigation-by-user-activation\"\"allow-top-navigation-to-custom-protocols\""
+    ],
+    "scope": [
+      "\"row\"; \"col\"; \"rowgroup\"; \"colgroup\""
+    ],
+    "selected": [
+      "Boolean attribute"
+    ],
+    "shadowrootclonable": [
+      "Boolean attribute"
+    ],
+    "shadowrootcustomelementregistry": [
+      "Boolean attribute"
+    ],
+    "shadowrootdelegatesfocus": [
+      "Boolean attribute"
+    ],
+    "shadowrootmode": [
+      "\"open\"; \"closed\""
+    ],
+    "shadowrootserializable": [
+      "Boolean attribute"
+    ],
+    "shadowrootslotassignment": [
+      "\"named\"; \"manual\""
+    ],
+    "shape": [
+      "\"circle\"; \"default\"; \"poly\"; \"rect\""
+    ],
+    "size": [
+      "Valid non-negative integer greater than zero"
+    ],
+    "sizes": [
+      "Unordered set of unique space-separated tokens, ASCII case-insensitive, consisting of sizes*",
+      "Valid source size list"
+    ],
+    "slot": [
+      "Text"
+    ],
+    "span": [
+      "Valid non-negative integer greater than zero"
+    ],
+    "spellcheck": [
+      "\"true\"; \"false\"; the empty string"
+    ],
+    "src": [
+      "Valid non-empty URL potentially surrounded by spaces"
+    ],
+    "srcdoc": [
+      "The source of an iframe srcdoc document*"
+    ],
+    "srclang": [
+      "Valid BCP 47 language tag"
+    ],
+    "srcset": [
+      "Comma-separated list of image candidate strings"
+    ],
+    "start": [
+      "Valid integer"
+    ],
+    "step": [
+      "Valid floating-point number greater than zero, or \"any\""
+    ],
+    "style": [
+      "CSS declarations*"
+    ],
+    "tabindex": [
+      "Valid integer"
+    ],
+    "target": [
+      "Valid navigable target name or keyword",
+      "Valid navigable target name or keyword",
+      "Valid navigable target name or keyword"
+    ],
+    "title": [
+      "Text",
+      "Text",
+      "Text",
+      "Text",
+      "Text"
+    ],
+    "translate": [
+      "\"yes\"; \"no\"; the empty string"
+    ],
+    "type": [
+      "Valid MIME type string",
+      "\"submit\"; \"reset\"; \"button\"",
+      "Valid MIME type string",
+      "input type keyword",
+      "\"1\"; \"a\"; \"A\"; \"i\"; \"I\"",
+      "\"module\"; \"importmap\"; \"speculationrules\"; a valid MIME type string that is not a JavaScript MIME type essence match"
+    ],
+    "usemap": [
+      "Valid hash-name reference*"
+    ],
+    "value": [
+      "Text",
+      "Text*",
+      "Varies*",
+      "Valid integer",
+      "Valid floating-point number"
+    ],
+    "width": [
+      "Valid non-negative integer"
+    ],
+    "wrap": [
+      "\"soft\"; \"hard\""
+    ],
+    "writingsuggestions": [
+      "\"true\"; \"false\"; the empty string"
+    ]
+  },
+  "eventHandlers": [
+    "onafterprint",
+    "onauxclick",
+    "onbeforeinput",
+    "onbeforematch",
+    "onbeforeprint",
+    "onbeforeunload",
+    "onbeforetoggle",
+    "onblur",
+    "oncancel",
+    "oncanplay",
+    "oncanplaythrough",
+    "onchange",
+    "onclick",
+    "onclose",
+    "oncommand",
+    "oncontextlost",
+    "oncontextmenu",
+    "oncontextrestored",
+    "oncopy",
+    "oncuechange",
+    "oncut",
+    "ondblclick",
+    "ondrag",
+    "ondragend",
+    "ondragenter",
+    "ondragleave",
+    "ondragover",
+    "ondragstart",
+    "ondrop",
+    "ondurationchange",
+    "onemptied",
+    "onended",
+    "onerror",
+    "onfocus",
+    "onformdata",
+    "onhashchange",
+    "oninput",
+    "oninvalid",
+    "onkeydown",
+    "onkeypress",
+    "onkeyup",
+    "onlanguagechange",
+    "onload",
+    "onloadeddata",
+    "onloadedmetadata",
+    "onloadstart",
+    "onmessage",
+    "onmessageerror",
+    "onmousedown",
+    "onmouseenter",
+    "onmouseleave",
+    "onmousemove",
+    "onmouseout",
+    "onmouseover",
+    "onmouseup",
+    "onoffline",
+    "ononline",
+    "onpagehide",
+    "onpagereveal",
+    "onpageshow",
+    "onpageswap",
+    "onpaste",
+    "onpause",
+    "onplay",
+    "onplaying",
+    "onpopstate",
+    "onprogress",
+    "onratechange",
+    "onreset",
+    "onresize",
+    "onrejectionhandled",
+    "onscroll",
+    "onscrollend",
+    "onsecuritypolicyviolation",
+    "onseeked",
+    "onseeking",
+    "onselect",
+    "onslotchange",
+    "onstalled",
+    "onstorage",
+    "onsubmit",
+    "onsuspend",
+    "ontimeupdate",
+    "ontoggle",
+    "onunhandledrejection",
+    "onunload",
+    "onvolumechange",
+    "onwaiting",
+    "onwheel"
+  ]
+}

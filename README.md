@@ -153,3 +153,131 @@ no title
 
 `addAttribute()` (and its alias `setAttribute()`) always replaces the attribute
 of that name. `addClass()` is the one that appends.
+
+## Every HTML attribute, with the right behaviour built in
+
+**Why you'd want it:** HTML has 233 standard attributes and they do not all
+work the same way. Some are on by being present, some are lists, some need
+`"false"` written out. The library knows which is which for every attribute in
+the [HTML Living Standard](https://html.spec.whatwg.org/multipage/indices.html#attributes-3),
+so you pass plain PHP values and never have to look it up.
+
+### Boolean attributes take real booleans
+
+Drive `checked`, `disabled`, `required` and the other 27 boolean attributes
+straight from a PHP condition. No ternaries, no `checked="checked"`.
+
+```php
+use Cam5\Domoarigato\Domo;
+
+$isAdmin = false;
+
+$input = Domo::createElement('input');
+
+$input->addAttribute('type', 'checkbox')
+    ->addAttribute('checked', true)
+    ->addAttribute('disabled', !$isAdmin)
+    ->addAttribute('required', $isAdmin);
+
+echo $input->render();
+```
+
+```html
+<input type="checkbox" checked disabled />
+```
+
+A browser treats `disabled="false"` as disabled, because the attribute is
+there. That bug cannot be written here:
+
+```php
+use Cam5\Domoarigato\Domo;
+
+try {
+    Domo::createElement('input')->addAttribute('disabled', 'false');
+} catch (InvalidArgumentException $e) {
+    echo $e->getMessage();
+}
+```
+
+```html
+The boolean "disabled" attribute only accepts true, false, null, "" or its own name.
+```
+
+### Attributes that have to say "false"
+
+Leaving `draggable` off does not mean "not draggable", it means "let the
+browser decide". For `contenteditable`, `draggable`, `spellcheck`,
+`writingsuggestions`, `translate` and `autocorrect`, booleans are written as
+the keywords each one expects.
+
+```php
+use Cam5\Domoarigato\Domo;
+
+$div = Domo::createElement('div');
+
+$div->addAttribute('draggable', false)
+    ->addAttribute('spellcheck', true)
+    ->addAttribute('translate', false)
+    ->addAttribute('autocorrect', false);
+
+echo $div->render();
+```
+
+```html
+<div draggable="false" spellcheck="true" translate="no" autocorrect="off"></div>
+```
+
+### List attributes are lists
+
+`rel`, `sandbox`, `headers`, `ping` and friends are space-separated token lists
+like `class`. `accept`, `srcset`, `imagesrcset` and `coords` are comma
+separated. Pass a string or an array, and edit them afterwards.
+
+```php
+use Cam5\Domoarigato\Domo;
+
+$link = Domo::createElement('a');
+$link->addAttribute('rel', 'noopener');
+$link->getAttribute('rel')->addValue('noreferrer')->addValue('noopener');
+
+$upload = Domo::createElement('input');
+$upload->addAttribute('type', 'file')
+    ->addAttribute('accept', ['image/png', 'image/jpeg'])
+    ->addAttribute('multiple', true);
+
+echo $link->render(), "\n";
+echo $upload->render();
+```
+
+```html
+<a rel="noopener noreferrer"></a>
+<input type="file" accept="image/png, image/jpeg" multiple />
+```
+
+### Constants, if you'd rather not type strings
+
+Each attribute has a constant on `Enums\Attributes`, which gives you editor
+completion and a way to check a name is standard.
+
+```php
+use Cam5\Domoarigato\Domo;
+use Cam5\Domoarigato\Enums\Attributes;
+
+$form = Domo::createElement('form');
+
+$form->addAttribute(Attributes::METHOD, 'post')
+    ->addAttribute(Attributes::NOVALIDATE, true);
+
+echo $form->render(), "\n";
+echo Attributes::contains('novalidate') ? 'standard' : 'unknown', "\n";
+echo Attributes::contains('no-validate') ? 'standard' : 'unknown';
+```
+
+```html
+<form method="post" novalidate></form>
+standard
+unknown
+```
+
+Attributes outside the standard (`data-*`, `aria-*`, `x-data`, `hx-get`,
+anything of your own) are never rejected. They behave as plain key-value pairs.
