@@ -14,7 +14,7 @@ $div = Domo::createElement('div');
 
 $div->setId('foo')
     ->addClass('bar')
-    ->setTextContent('baz');
+    ->setText('baz');
 
 echo $div->render();
 ```
@@ -27,6 +27,164 @@ Requires PHP 8.2 or newer.
 
 Every example in this file is run by the test suite, and its output compared
 with the block that follows it. If the README says it, the code does it.
+
+## Content: text, nesting and whole documents
+
+**Why you'd want it:** building markup by concatenating strings means every
+variable is one forgotten `htmlspecialchars()` away from an XSS bug, and every
+`if` in a template is a chance to leave a tag open. Here text is escaped unless
+you say otherwise, tags always close, and a tree of elements is a value you can
+pass around, add to and render when you are ready.
+
+### Text is escaped by default
+
+```php
+use Cam5\Domoarigato\Domo;
+
+$comment = '<script>alert("gotcha")</script> Tom & Jerry';
+
+$p = Domo::createElement('p');
+$p->setText($comment);
+
+echo $p->render(), "\n";
+echo $p->getTextContent();
+```
+
+```html
+<p>&lt;script&gt;alert("gotcha")&lt;/script&gt; Tom &amp; Jerry</p>
+<script>alert("gotcha")</script> Tom & Jerry
+```
+
+`getTextContent()` hands back what you put in, unescaped, so the element can be
+a source of truth and not just an output format.
+
+### Elements nest
+
+`appendChild()`, `prependChild()` and the variadic `append()` take elements,
+strings and numbers. Strings are text, and are escaped.
+
+```php
+use Cam5\Domoarigato\Domo;
+
+$list = Domo::createElement('ul');
+
+foreach (['Milk', 'Eggs & bacon', 'Bread'] as $item) {
+    $list->appendChild(Domo::createElement('li')->setText($item));
+}
+
+$list->prependChild(Domo::createElement('li')->addClass('urgent')->setText('Coffee'));
+
+echo $list->render();
+```
+
+```html
+<ul><li class="urgent">Coffee</li><li>Milk</li><li>Eggs &amp; bacon</li><li>Bread</li></ul>
+```
+
+### Build a tree in one expression
+
+`createElement()` takes attributes and content as its second and third
+arguments, which reads a lot like the HTML it produces.
+
+```php
+use Cam5\Domoarigato\Domo;
+
+$card = Domo::createElement('article', ['class' => 'card', 'data-id' => 7], [
+    Domo::createElement('h2', [], 'Fish & chips'),
+    Domo::createElement('p', [], [
+        'Served ',
+        Domo::createElement('em', [], 'hot'),
+        ', always.',
+    ]),
+]);
+
+echo $card->render();
+```
+
+```html
+<article class="card" data-id="7"><h2>Fish &amp; chips</h2><p>Served <em>hot</em>, always.</p></article>
+```
+
+### Echo it
+
+Every node is `Stringable`, so it drops into a template, a string or a
+`Response` body without calling `render()`.
+
+```php
+use Cam5\Domoarigato\Domo;
+
+$badge = Domo::createElement('span', ['class' => 'badge'], 'New');
+
+echo "<h1>Inbox {$badge}</h1>";
+```
+
+```html
+<h1>Inbox <span class="badge">New</span></h1>
+```
+
+### Trusted HTML, comments and whole documents
+
+When you already have HTML you trust (rendered Markdown, a cached partial),
+`setInnerHtml()` or `Domo::raw()` passes it through untouched. `Domo::comment()`
+refuses text that would end the comment early, and `Domo::fragment()` groups
+siblings without a wrapper element.
+
+```php
+use Cam5\Domoarigato\Domo;
+
+$page = Domo::fragment(
+    Domo::doctype(),
+    Domo::createElement('html', ['lang' => 'en'], [
+        Domo::createElement('head', [], Domo::createElement('title', [], 'Tom & Jerry')),
+        Domo::createElement('body', [], [
+            Domo::comment(' rendered by Domoarigato '),
+            Domo::createElement('main')->setInnerHtml('<p>Already <b>HTML</b>.</p>'),
+        ]),
+    ])
+);
+
+echo $page;
+```
+
+```html
+<!DOCTYPE html><html lang="en"><head><title>Tom &amp; Jerry</title></head><body><!-- rendered by Domoarigato --><main><p>Already <b>HTML</b>.</p></main></body></html>
+```
+
+### Mistakes are caught early
+
+Tag names are validated like attribute names are, an element cannot be placed
+inside itself, and `clone` gives you a deep copy that shares nothing with the
+original.
+
+```php
+use Cam5\Domoarigato\Domo;
+
+$template = Domo::createElement('li', ['class' => 'item'], 'Template');
+
+$copy = clone $template;
+$copy->addClass('is-active')->setText('Copy');
+
+echo $template, "\n", $copy, "\n";
+
+try {
+    Domo::createElement('div onclick=alert(1)');
+} catch (InvalidArgumentException $e) {
+    echo $e->getMessage(), "\n";
+}
+
+try {
+    $template->appendChild($template);
+} catch (InvalidArgumentException $e) {
+    echo $e->getMessage();
+}
+```
+
+```html
+<li class="item">Template</li>
+<li class="item is-active">Copy</li>
+"div onclick=alert(1)" is not a valid tag name.
+A node cannot be placed inside of itself.
+```
 
 ## Attributes
 

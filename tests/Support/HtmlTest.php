@@ -198,4 +198,131 @@ final class HtmlTest extends TestCase
             $this->assertSame('"a b" is not a valid attribute name.', $e->getMessage());
         }
     }//end testExceptionMessages()
+
+    /**
+     * Raw text, and what it should look like between tags.
+     *
+     * @return array
+     */
+    public static function textValues(): array
+    {
+        return [
+            'plain text'     => ['lorem ipsum', 'lorem ipsum'],
+            'empty string'   => ['', ''],
+            'angle brackets' => ['<b>', '&lt;b&gt;'],
+            'ampersand'      => ['a&b', 'a&amp;b'],
+            'quotes'         => ['"a" \'b\'', '"a" \'b\''],
+            'invalid utf-8'  => ["a\xFFb", "a\u{FFFD}b"],
+            'multibyte'      => ['naïve ☃', 'naïve ☃'],
+        ];
+    }//end textValues()
+
+    /**
+     * Test that text can't turn into markup.
+     *
+     * @param string $raw      The text as given.
+     * @param string $expected The text as it should be written.
+     *
+     * @return void
+     */
+    #[DataProvider('textValues')]
+    public function testEscapesText(string $raw, string $expected): void
+    {
+        $this->assertSame($expected, Html::escapeText($raw));
+    }//end testEscapesText()
+
+    /**
+     * Tag names we accept, and the form we store them in.
+     *
+     * @return array
+     */
+    public static function validTagNames(): array
+    {
+        return [
+            'lowercase'              => ['div', 'div'],
+            'uppercase'              => ['DIV', 'div'],
+            'mixed case'             => ['BlockQuote', 'blockquote'],
+            'single letter'          => ['a', 'a'],
+            'with digit'             => ['h1', 'h1'],
+            'custom element'         => ['my-element', 'my-element'],
+            'custom, many hyphens'   => ['any-old-thing', 'any-old-thing'],
+            'custom, trailing hyphen' => ['x-', 'x-'],
+            'custom, dot'            => ['my-el.v2', 'my-el.v2'],
+            'custom, underscore'     => ['my_el-x', 'my_el-x'],
+            'custom, uppercase'      => ['My-Element', 'my-element'],
+            'custom, non-ascii'      => ['math-α', 'math-α'],
+            'custom, emoji'          => ["emotion-\u{1F60D}", "emotion-\u{1F60D}"],
+            'custom, middle dot'     => ["a-\u{B7}", "a-\u{B7}"],
+        ];
+    }//end validTagNames()
+
+    /**
+     * Test that valid tag names pass, lowercased.
+     *
+     * @param string $name     The name as given.
+     * @param string $expected The name as stored.
+     *
+     * @return void
+     */
+    #[DataProvider('validTagNames')]
+    public function testNormalizesTagNames(string $name, string $expected): void
+    {
+        $this->assertSame($expected, Html::normalizeTagName($name));
+    }//end testNormalizesTagNames()
+
+    /**
+     * Tag names that would produce broken, or dangerous, markup.
+     *
+     * @return array
+     */
+    public static function invalidTagNames(): array
+    {
+        return [
+            'empty'                  => [''],
+            'space'                  => [' '],
+            'starts with digit'      => ['1div'],
+            'starts with hyphen'     => ['-div'],
+            'starts with underscore' => ['_div'],
+            'starts with non-ascii'  => ['élément'],
+            'leading space'          => [' div'],
+            'trailing space'         => ['div '],
+            'trailing newline'       => ["div\n"],
+            'inner space'            => ['my element'],
+            'attribute smuggling'    => ['div onclick=alert(1)'],
+            'tag smuggling'          => ['div><script'],
+            'closing tag'            => ['/div'],
+            'self closing'           => ['br/'],
+            'angle brackets'         => ['<div>'],
+            'quote'                  => ['di"v'],
+            'equals'                 => ['a=b'],
+            'colon'                  => ['svg:rect'],
+            'null byte'              => ["div\0"],
+            'tab'                    => ["di\tv"],
+            'multiplication sign'    => ["a-\u{D7}"],
+            'division sign'          => ["a-\u{F7}"],
+            'greek question mark'    => ["a-\u{37E}"],
+            'noncharacter'           => ["a-\u{FFFF}"],
+            'private use plane'      => ["a-\u{F0000}"],
+            'invalid utf-8'          => ["div\xFF"],
+            'comment opener'         => ['!--'],
+            'doctype'                => ['!DOCTYPE'],
+            'processing instruction' => ['?php'],
+        ];
+    }//end invalidTagNames()
+
+    /**
+     * Test that invalid tag names are refused.
+     *
+     * @param string $name The name as given.
+     *
+     * @return void
+     */
+    #[DataProvider('invalidTagNames')]
+    public function testRefusesInvalidTagNames(string $name): void
+    {
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('is not a valid tag name.');
+
+        Html::normalizeTagName($name);
+    }//end testRefusesInvalidTagNames()
 }//end class

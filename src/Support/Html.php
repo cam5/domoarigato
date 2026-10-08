@@ -40,6 +40,52 @@ class Html
         .']/u';
 
     /**
+     * What a tag name may look like: a built-in element's letters and digits, or a custom
+     * element's wider set of characters.
+     *
+     * @var string
+     */
+    const TAG_NAME_PATTERN = '/^[A-Za-z]['
+        .'A-Za-z0-9._\-\x{B7}\x{C0}-\x{D6}\x{D8}-\x{F6}\x{F8}-\x{37D}\x{37F}-\x{1FFF}\x{200C}\x{200D}'
+        .'\x{203F}\x{2040}\x{2070}-\x{218F}\x{2C00}-\x{2FEF}\x{3001}-\x{D7FF}\x{F900}-\x{FDCF}'
+        .'\x{FDF0}-\x{FFFD}\x{10000}-\x{EFFFF}'
+        .']*$/Du';
+
+    /**
+     * Escapes a string for use as text between tags.
+     *
+     * Quotes mean nothing there, so they are left alone.
+     *
+     * @param string $string The raw text.
+     *
+     * @return string
+     */
+    public static function escapeText(string $string): string
+    {
+        return htmlspecialchars($string, (ENT_NOQUOTES | ENT_SUBSTITUTE | ENT_HTML5), 'UTF-8');
+    }//end escapeText()
+
+    /**
+     * Normalizes a tag name, refusing anything that could not be serialized safely.
+     *
+     * Tag names are ASCII case-insensitive in HTML, so they are lowercased here.
+     *
+     * @param string $name The name of the element.
+     *
+     * @throws \InvalidArgumentException When the name isn't a valid tag name.
+     *
+     * @return string The normalized name.
+     */
+    public static function normalizeTagName(string $name): string
+    {
+        if (1 !== preg_match(self::TAG_NAME_PATTERN, $name)) {
+            throw new \InvalidArgumentException('"'.$name.'" is not a valid tag name.');
+        }
+
+        return strtolower($name);
+    }//end normalizeTagName()
+
+    /**
      * Escapes a string for use inside a double-quoted attribute value.
      *
      * @param string $string The raw value.

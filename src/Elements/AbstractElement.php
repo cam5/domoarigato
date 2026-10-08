@@ -8,6 +8,7 @@ use Cam5\Domoarigato\Attributes\AttributeInterface;
 use Cam5\Domoarigato\Attributes\CollectionAttribute;
 use Cam5\Domoarigato\Enums\Attributes;
 use Cam5\Domoarigato\Factories\AttributeFactory;
+use Cam5\Domoarigato\Nodes\Traits\CastsToString;
 
 /**
  * An abstract representation of an HTML element.
@@ -16,6 +17,7 @@ use Cam5\Domoarigato\Factories\AttributeFactory;
  */
 abstract class AbstractElement
 {
+    use CastsToString;
 
     /**
      * An array of attributes.
@@ -37,6 +39,18 @@ abstract class AbstractElement
      * @return string
      */
     abstract public function render(): string;
+
+    /**
+     * Gives a cloned element attributes of its own, so changing one copy leaves the other alone.
+     *
+     * @return void
+     */
+    public function __clone()
+    {
+        foreach ($this->attributes as $key => $attribute) {
+            $this->attributes[$key] = clone $attribute;
+        }
+    }//end __clone()
 
     /**
      * Renders attributes for the tag.
