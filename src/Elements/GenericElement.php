@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Cam5\Domoarigato\Elements;
 
 /**
@@ -13,20 +15,16 @@ class GenericElement extends EnclosingElement implements ElementInterface
      *
      * @var string
      */
-    protected $tagName;
+    protected string $tagName;
 
     /**
      * Constructor
      *
      * @param string $tagName The name of the element.
-     *
-     * @return self
      */
-    public function __construct($tagName)
+    public function __construct(string $tagName)
     {
         $this->tagName = $tagName;
-
-        return $this;
     }//end __construct()
 
     /**
@@ -34,7 +32,7 @@ class GenericElement extends EnclosingElement implements ElementInterface
      *
      * @return string
      */
-    public function getTagName()
+    public function getTagName(): string
     {
         return $this->tagName;
     }//end getTagName()

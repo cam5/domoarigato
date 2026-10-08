@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Cam5\Domoarigato\Enums;
 
 use Cam5\Domoarigato\Attributes as Attr;
@@ -17,7 +19,7 @@ class Attributes extends StaticEnum
      *
      * @var array
      */
-    protected static $keys = [
+    protected static array $keys = [
         self::ID         => Attr\SimpleAttribute::class,
         self::ATTR_CLASS => Attr\CollectionAttribute::class,
     ];

@@ -1,22 +1,21 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Cam5\Domoarigato\tests;
 
 use Cam5\Domoarigato\Domo;
 use Cam5\Domoarigato\Elements\Div;
 use Cam5\Domoarigato\Elements\GenericElement;
 use Cam5\Domoarigato\Elements\ElementInterface;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers Cam5\Domoarigato\Domo
- */
+#[CoversClass(\Cam5\Domoarigato\Domo::class)]
+#[CoversClass(\Cam5\Domoarigato\Factories\ElementFactory::class)]
 final class DomoTest extends TestCase
 {
-    /**
-     * @covers Cam5\Domoarigato\Factories\ElementFactory::createFromName
-     */
-    public function testCreatesADivByName()
+    public function testCreatesADivByName(): void
     {
         $this->assertInstanceOf(
             Div::class,
@@ -24,10 +23,7 @@ final class DomoTest extends TestCase
         );
     }
 
-    /**
-     * @covers Cam5\Domoarigato\Factories\ElementFactory::createFromName
-     */
-    public function testCreatesGenericElementByName()
+    public function testCreatesGenericElementByName(): void
     {
         $this->assertInstanceOf(
             GenericElement::class,
@@ -35,10 +31,7 @@ final class DomoTest extends TestCase
         );
     }
 
-    /**
-     * @covers Cam5\Domoarigato\Factories\ElementFactory::createFromName
-     */
-    public function testCreatesElementsConformingToACommonInterface()
+    public function testCreatesElementsConformingToACommonInterface(): void
     {
         $this->assertInstanceOf(
             ElementInterface::class,

@@ -1,7 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Cam5\Domoarigato\Factories;
 
+use Cam5\Domoarigato\Attributes\AttributeInterface;
 use Cam5\Domoarigato\Attributes\SimpleAttribute;
 use Cam5\Domoarigato\Enums\Attributes;
 
@@ -21,7 +24,7 @@ class AttributeFactory
      *
      * @return AttributeInterface
      */
-    public static function createFromName($name)
+    public static function createFromName(string $name): AttributeInterface
     {
         $attr = new SimpleAttribute();
 

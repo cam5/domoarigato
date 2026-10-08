@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Cam5\Domoarigato\Enums;
 
 use Cam5\Domoarigato\Elements as El;
@@ -17,7 +19,7 @@ class Elements extends StaticEnum
      *
      * @var array
      */
-    protected static $keys = [
+    protected static array $keys = [
         self::DIV   => El\Div::class,
         self::INPUT => El\Input::class,
     ];

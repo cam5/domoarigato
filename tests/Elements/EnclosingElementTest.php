@@ -1,16 +1,19 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Cam5\Domoarigato\tests;
 
 use Cam5\Domoarigato\Domo;
 use Cam5\Domoarigato\Attributes\SimpleAttribute;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
 /**
  * Test elements descended from the abstract `EnclosingElement`
- *
- * @covers Cam5\Domoarigato\Elements\EnclosingElement
  */
+#[CoversClass(\Cam5\Domoarigato\Elements\EnclosingElement::class)]
+#[CoversClass(\Cam5\Domoarigato\Elements\AbstractElement::class)]
 final class EnclosingElementTest extends TestCase
 {
 
@@ -33,7 +36,7 @@ final class EnclosingElementTest extends TestCase
      *
      * @return void
      */
-    public function setUp()
+    protected function setUp(): void
     {
         // We know that 'div' is enclosing.
         $this->el = Domo::createElement('div');
@@ -44,7 +47,7 @@ final class EnclosingElementTest extends TestCase
      *
      * @return void
      */
-    public function testGetAndSetText()
+    public function testGetAndSetText(): void
     {
         $this->el->setTextContent($this->text);
 
@@ -59,7 +62,7 @@ final class EnclosingElementTest extends TestCase
      *
      * @return void
      */
-    public function testRendering()
+    public function testRendering(): void
     {
         $this->el->setTextContent($this->text);
 
@@ -72,12 +75,9 @@ final class EnclosingElementTest extends TestCase
     /**
      * Test attribute rendering.
      *
-     * @covers Cam5\Domoarigato\Elements\AbstractElement::renderAttrs()
-     * @covers Cam5\Domoarigato\Elements\AbstractElement::renderAttr()
-     *
      * @return void
      */
-    public function testAttributesRenderAsExpected()
+    public function testAttributesRenderAsExpected(): void
     {
         $this->el->addAttribute('foo', 'bar')
             ->addAttribute('bar', 'baz');
@@ -100,12 +100,9 @@ final class EnclosingElementTest extends TestCase
     /**
      * Given an attribute, test that it's stored on the object.
      *
-     * @covers Cam5\Domoarigato\Elements\AbstractElement::addAttribute()
-     * @covers Cam5\Domoarigato\Elements\AbstractElement::getAttributes()
-     *
      * @return void
      */
-    public function testAttributesAreAdded()
+    public function testAttributesAreAdded(): void
     {
         $testAttr = new SimpleAttribute();
         $testAttr->setKey('lorem')

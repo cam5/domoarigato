@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Cam5\Domoarigato\Attributes;
 
 interface AttributeInterface
@@ -9,5 +11,5 @@ interface AttributeInterface
      *
      * @return string
      */
-    public function render();
+    public function render(): string;
 }//end interface

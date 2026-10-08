@@ -1,7 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Cam5\Domoarigato\Factories;
 
+use Cam5\Domoarigato\Elements\ElementInterface;
 use Cam5\Domoarigato\Elements\GenericElement;
 use Cam5\Domoarigato\Enums\Elements;
 
@@ -20,12 +23,12 @@ class ElementFactory
      *
      * @return ElementInterface
      */
-    public static function createFromName($name)
+    public static function createFromName(string $name): ElementInterface
     {
         if (true === Elements::contains($name)) {
             $className = Elements::get($name);
 
-            return new $className;
+            return new $className();
         }
 
         return new GenericElement($name);
