@@ -331,6 +331,64 @@ generic
 115 elements
 ```
 
+## Knowing what goes where
+
+**Why you'd want it:** HTML has rules about nesting (a `<ul>` holds `<li>`s, a
+`<p>` cannot hold a `<div>`) and browsers quietly rearrange markup that breaks
+them, which is how a layout ends up different from the template that produced
+it. The rules for all 115 elements ship with the library as plain data, taken
+from the
+[HTML Living Standard](https://html.spec.whatwg.org/multipage/indices.html#element-content-categories),
+so your own code can ask instead of hard-coding lists of tag names.
+
+### What kind of content is this element?
+
+Every element belongs to zero or more categories. `Categories::of()` gives the
+ones it always belongs to, and `Categories::get()` lists a category's members.
+
+```php
+use Cam5\Domoarigato\Enums\Categories;
+
+echo implode(', ', Categories::of('em')), "\n";
+echo implode(', ', Categories::of('section')), "\n";
+echo implode(', ', Categories::get(Categories::SECTIONING)), "\n";
+echo in_array('div', Categories::get(Categories::PHRASING), true) ? 'inline' : 'not inline', "\n";
+
+// Some memberships depend on attributes: an <a> is only interactive with an href.
+echo implode(', ', Categories::conditionallyOf('a'));
+```
+
+```html
+flow, phrasing, palpable
+flow, sectioning, palpable
+article, aside, nav, section
+not inline
+interactive
+```
+
+### What may this element contain?
+
+A content model is a list of allowed element names, categories, and three
+markers: `#text`, `#transparent` (whatever the parent allows) and `#anything`.
+An empty list means nothing is allowed.
+
+```php
+use Cam5\Domoarigato\Enums\ContentModels;
+
+foreach (['ul', 'p', 'tr', 'a', 'title', 'br'] as $name) {
+    echo $name, ': ', implode(', ', ContentModels::get($name)) ?: '(nothing)', "\n";
+}
+```
+
+```html
+ul: li, script-supporting
+p: phrasing
+tr: th, td, script-supporting
+a: #transparent
+title: #text
+br: (nothing)
+```
+
 ## Attributes
 
 **Why you'd want it:** attributes are where hand-written HTML strings go wrong.

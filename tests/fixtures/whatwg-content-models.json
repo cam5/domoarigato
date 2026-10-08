@@ -1,0 +1,1477 @@
+{
+  "source": "https://html.spec.whatwg.org/multipage/indices.html",
+  "retrieved": "2026-10-07",
+  "categories": {
+    "metadata": {
+      "elements": [
+        "base",
+        "link",
+        "meta",
+        "noscript",
+        "script",
+        "style",
+        "template",
+        "title"
+      ],
+      "exceptions": "—"
+    },
+    "flow": {
+      "elements": [
+        "a",
+        "abbr",
+        "address",
+        "article",
+        "aside",
+        "audio",
+        "b",
+        "bdi",
+        "bdo",
+        "blockquote",
+        "br",
+        "button",
+        "canvas",
+        "cite",
+        "code",
+        "data",
+        "datalist",
+        "del",
+        "details",
+        "dfn",
+        "dialog",
+        "div",
+        "dl",
+        "em",
+        "embed",
+        "fieldset",
+        "figure",
+        "footer",
+        "form",
+        "h1",
+        "h2",
+        "h3",
+        "h4",
+        "h5",
+        "h6",
+        "header",
+        "hgroup",
+        "hr",
+        "i",
+        "iframe",
+        "img",
+        "input",
+        "ins",
+        "kbd",
+        "label",
+        "map",
+        "mark",
+        "MathML math",
+        "menu",
+        "meter",
+        "nav",
+        "noscript",
+        "object",
+        "ol",
+        "output",
+        "p",
+        "picture",
+        "pre",
+        "progress",
+        "q",
+        "ruby",
+        "s",
+        "samp",
+        "script",
+        "search",
+        "section",
+        "select",
+        "slot",
+        "small",
+        "span",
+        "strong",
+        "sub",
+        "sup",
+        "SVG svg",
+        "table",
+        "template",
+        "textarea",
+        "time",
+        "u",
+        "ul",
+        "var",
+        "video",
+        "wbr",
+        "autonomous custom elements",
+        "Text"
+      ],
+      "exceptions": "area (if it is a descendant of a map element); link (if it is allowed in the body); main (if it is a hierarchically correct main element); meta (if the itemprop attribute is present)"
+    },
+    "sectioning": {
+      "elements": [
+        "article",
+        "aside",
+        "nav",
+        "section"
+      ],
+      "exceptions": "—"
+    },
+    "heading": {
+      "elements": [
+        "h1",
+        "h2",
+        "h3",
+        "h4",
+        "h5",
+        "h6",
+        "hgroup"
+      ],
+      "exceptions": "—"
+    },
+    "phrasing": {
+      "elements": [
+        "a",
+        "abbr",
+        "audio",
+        "b",
+        "bdi",
+        "bdo",
+        "br",
+        "button",
+        "canvas",
+        "cite",
+        "code",
+        "data",
+        "datalist",
+        "del",
+        "dfn",
+        "em",
+        "embed",
+        "i",
+        "iframe",
+        "img",
+        "input",
+        "ins",
+        "kbd",
+        "label",
+        "map",
+        "mark",
+        "MathML math",
+        "meter",
+        "noscript",
+        "object",
+        "output",
+        "picture",
+        "progress",
+        "q",
+        "ruby",
+        "s",
+        "samp",
+        "script",
+        "select",
+        "selectedcontent",
+        "slot",
+        "small",
+        "span",
+        "strong",
+        "sub",
+        "sup",
+        "SVG svg",
+        "template",
+        "textarea",
+        "time",
+        "u",
+        "var",
+        "video",
+        "wbr",
+        "autonomous custom elements",
+        "Text"
+      ],
+      "exceptions": "area (if it is a descendant of a map element); link (if it is allowed in the body); meta (if the itemprop attribute is present)"
+    },
+    "embedded": {
+      "elements": [
+        "audio",
+        "canvas",
+        "embed",
+        "iframe",
+        "img",
+        "MathML math",
+        "object",
+        "picture",
+        "SVG svg",
+        "video"
+      ],
+      "exceptions": "—"
+    },
+    "interactive": {
+      "elements": [
+        "button",
+        "details",
+        "embed",
+        "iframe",
+        "label",
+        "select",
+        "textarea"
+      ],
+      "exceptions": "a (if the href attribute is present); audio (if the controls attribute is present); img (if the usemap or controls attribute is present); input (if the type attribute is not in the Hidden state); video (if the controls attribute is present)"
+    },
+    "palpable": {
+      "elements": [
+        "a",
+        "abbr",
+        "address",
+        "article",
+        "aside",
+        "b",
+        "bdi",
+        "bdo",
+        "blockquote",
+        "button",
+        "canvas",
+        "cite",
+        "code",
+        "data",
+        "del",
+        "details",
+        "dfn",
+        "div",
+        "em",
+        "embed",
+        "fieldset",
+        "figure",
+        "footer",
+        "form",
+        "h1",
+        "h2",
+        "h3",
+        "h4",
+        "h5",
+        "h6",
+        "header",
+        "hgroup",
+        "i",
+        "iframe",
+        "img",
+        "ins",
+        "kbd",
+        "label",
+        "main",
+        "map",
+        "mark",
+        "MathML math",
+        "meter",
+        "nav",
+        "object",
+        "output",
+        "p",
+        "picture",
+        "pre",
+        "progress",
+        "q",
+        "ruby",
+        "s",
+        "samp",
+        "search",
+        "section",
+        "select",
+        "small",
+        "span",
+        "strong",
+        "sub",
+        "sup",
+        "SVG svg",
+        "table",
+        "textarea",
+        "time",
+        "u",
+        "var",
+        "video",
+        "autonomous custom elements"
+      ],
+      "exceptions": "audio (if the controls attribute is present); dl (if the element's children include at least one name-value group); input (if the type attribute is not in the Hidden state); menu (if the element's children include at least one li element); ol (if the element's children include at least one li element); ul (if the element's children include at least one li element); Text that is not inter-element whitespace"
+    },
+    "script-supporting": {
+      "elements": [
+        "script",
+        "template"
+      ],
+      "exceptions": "—"
+    }
+  },
+  "elements": {
+    "a": {
+      "categories": [
+        "flow",
+        "phrasing*",
+        "interactive",
+        "palpable"
+      ],
+      "children": [
+        "transparent*"
+      ]
+    },
+    "abbr": {
+      "categories": [
+        "flow",
+        "phrasing",
+        "palpable"
+      ],
+      "children": [
+        "phrasing"
+      ]
+    },
+    "address": {
+      "categories": [
+        "flow",
+        "palpable"
+      ],
+      "children": [
+        "flow*"
+      ]
+    },
+    "area": {
+      "categories": [
+        "flow",
+        "phrasing"
+      ],
+      "children": [
+        "empty"
+      ]
+    },
+    "article": {
+      "categories": [
+        "flow",
+        "sectioning",
+        "palpable"
+      ],
+      "children": [
+        "flow"
+      ]
+    },
+    "aside": {
+      "categories": [
+        "flow",
+        "sectioning",
+        "palpable"
+      ],
+      "children": [
+        "flow"
+      ]
+    },
+    "audio": {
+      "categories": [
+        "flow",
+        "phrasing",
+        "embedded",
+        "interactive",
+        "palpable*"
+      ],
+      "children": [
+        "source*",
+        "track*",
+        "transparent*"
+      ]
+    },
+    "b": {
+      "categories": [
+        "flow",
+        "phrasing",
+        "palpable"
+      ],
+      "children": [
+        "phrasing"
+      ]
+    },
+    "base": {
+      "categories": [
+        "metadata"
+      ],
+      "children": [
+        "empty"
+      ]
+    },
+    "bdi": {
+      "categories": [
+        "flow",
+        "phrasing",
+        "palpable"
+      ],
+      "children": [
+        "phrasing"
+      ]
+    },
+    "bdo": {
+      "categories": [
+        "flow",
+        "phrasing",
+        "palpable"
+      ],
+      "children": [
+        "phrasing"
+      ]
+    },
+    "blockquote": {
+      "categories": [
+        "flow",
+        "palpable"
+      ],
+      "children": [
+        "flow"
+      ]
+    },
+    "body": {
+      "categories": [
+        "none"
+      ],
+      "children": [
+        "flow"
+      ]
+    },
+    "br": {
+      "categories": [
+        "flow",
+        "phrasing"
+      ],
+      "children": [
+        "empty"
+      ]
+    },
+    "button": {
+      "categories": [
+        "flow",
+        "phrasing",
+        "interactive",
+        "listed",
+        "labelable",
+        "submittable",
+        "form-associated",
+        "palpable"
+      ],
+      "children": [
+        "phrasing*"
+      ]
+    },
+    "canvas": {
+      "categories": [
+        "flow",
+        "phrasing",
+        "embedded",
+        "palpable"
+      ],
+      "children": [
+        "transparent"
+      ]
+    },
+    "caption": {
+      "categories": [
+        "none"
+      ],
+      "children": [
+        "flow*"
+      ]
+    },
+    "cite": {
+      "categories": [
+        "flow",
+        "phrasing",
+        "palpable"
+      ],
+      "children": [
+        "phrasing"
+      ]
+    },
+    "code": {
+      "categories": [
+        "flow",
+        "phrasing",
+        "palpable"
+      ],
+      "children": [
+        "phrasing"
+      ]
+    },
+    "col": {
+      "categories": [
+        "none"
+      ],
+      "children": [
+        "empty"
+      ]
+    },
+    "colgroup": {
+      "categories": [
+        "none"
+      ],
+      "children": [
+        "col*",
+        "template*"
+      ]
+    },
+    "data": {
+      "categories": [
+        "flow",
+        "phrasing",
+        "palpable"
+      ],
+      "children": [
+        "phrasing"
+      ]
+    },
+    "datalist": {
+      "categories": [
+        "flow",
+        "phrasing"
+      ],
+      "children": [
+        "phrasing*",
+        "option*",
+        "script-supporting elements*"
+      ]
+    },
+    "dd": {
+      "categories": [
+        "none"
+      ],
+      "children": [
+        "flow"
+      ]
+    },
+    "del": {
+      "categories": [
+        "flow",
+        "phrasing*",
+        "palpable"
+      ],
+      "children": [
+        "transparent"
+      ]
+    },
+    "details": {
+      "categories": [
+        "flow",
+        "interactive",
+        "palpable"
+      ],
+      "children": [
+        "summary*",
+        "flow"
+      ]
+    },
+    "dfn": {
+      "categories": [
+        "flow",
+        "phrasing",
+        "palpable"
+      ],
+      "children": [
+        "phrasing*"
+      ]
+    },
+    "dialog": {
+      "categories": [
+        "flow"
+      ],
+      "children": [
+        "flow"
+      ]
+    },
+    "div": {
+      "categories": [
+        "flow",
+        "palpable"
+      ],
+      "children": [
+        "flow*"
+      ]
+    },
+    "dl": {
+      "categories": [
+        "flow",
+        "palpable"
+      ],
+      "children": [
+        "dt*",
+        "dd*",
+        "div*",
+        "script-supporting elements"
+      ]
+    },
+    "dt": {
+      "categories": [
+        "none"
+      ],
+      "children": [
+        "flow*"
+      ]
+    },
+    "em": {
+      "categories": [
+        "flow",
+        "phrasing",
+        "palpable"
+      ],
+      "children": [
+        "phrasing"
+      ]
+    },
+    "embed": {
+      "categories": [
+        "flow",
+        "phrasing",
+        "embedded",
+        "interactive",
+        "palpable"
+      ],
+      "children": [
+        "empty"
+      ]
+    },
+    "fieldset": {
+      "categories": [
+        "flow",
+        "listed",
+        "form-associated",
+        "palpable"
+      ],
+      "children": [
+        "legend*",
+        "flow"
+      ]
+    },
+    "figcaption": {
+      "categories": [
+        "none"
+      ],
+      "children": [
+        "flow"
+      ]
+    },
+    "figure": {
+      "categories": [
+        "flow",
+        "palpable"
+      ],
+      "children": [
+        "figcaption*",
+        "flow"
+      ]
+    },
+    "footer": {
+      "categories": [
+        "flow",
+        "palpable"
+      ],
+      "children": [
+        "flow*"
+      ]
+    },
+    "form": {
+      "categories": [
+        "flow",
+        "palpable"
+      ],
+      "children": [
+        "flow*"
+      ]
+    },
+    "h1": {
+      "categories": [
+        "flow",
+        "heading",
+        "palpable"
+      ],
+      "children": [
+        "phrasing"
+      ]
+    },
+    "h2": {
+      "categories": [
+        "flow",
+        "heading",
+        "palpable"
+      ],
+      "children": [
+        "phrasing"
+      ]
+    },
+    "h3": {
+      "categories": [
+        "flow",
+        "heading",
+        "palpable"
+      ],
+      "children": [
+        "phrasing"
+      ]
+    },
+    "h4": {
+      "categories": [
+        "flow",
+        "heading",
+        "palpable"
+      ],
+      "children": [
+        "phrasing"
+      ]
+    },
+    "h5": {
+      "categories": [
+        "flow",
+        "heading",
+        "palpable"
+      ],
+      "children": [
+        "phrasing"
+      ]
+    },
+    "h6": {
+      "categories": [
+        "flow",
+        "heading",
+        "palpable"
+      ],
+      "children": [
+        "phrasing"
+      ]
+    },
+    "head": {
+      "categories": [
+        "none"
+      ],
+      "children": [
+        "metadata content*"
+      ]
+    },
+    "header": {
+      "categories": [
+        "flow",
+        "palpable"
+      ],
+      "children": [
+        "flow*"
+      ]
+    },
+    "hgroup": {
+      "categories": [
+        "flow",
+        "palpable"
+      ],
+      "children": [
+        "h1",
+        "h2",
+        "h3",
+        "h4",
+        "h5",
+        "h6",
+        "p",
+        "script-supporting elements"
+      ]
+    },
+    "hr": {
+      "categories": [
+        "flow"
+      ],
+      "children": [
+        "empty"
+      ]
+    },
+    "html": {
+      "categories": [
+        "none"
+      ],
+      "children": [
+        "head*",
+        "body*"
+      ]
+    },
+    "i": {
+      "categories": [
+        "flow",
+        "phrasing",
+        "palpable"
+      ],
+      "children": [
+        "phrasing"
+      ]
+    },
+    "iframe": {
+      "categories": [
+        "flow",
+        "phrasing",
+        "embedded",
+        "interactive",
+        "palpable"
+      ],
+      "children": [
+        "empty"
+      ]
+    },
+    "img": {
+      "categories": [
+        "flow",
+        "phrasing",
+        "embedded",
+        "interactive*",
+        "form-associated",
+        "palpable"
+      ],
+      "children": [
+        "empty"
+      ]
+    },
+    "input": {
+      "categories": [
+        "flow",
+        "phrasing",
+        "interactive*",
+        "listed",
+        "labelable",
+        "submittable",
+        "resettable",
+        "form-associated",
+        "palpable*"
+      ],
+      "children": [
+        "empty"
+      ]
+    },
+    "ins": {
+      "categories": [
+        "flow",
+        "phrasing*",
+        "palpable"
+      ],
+      "children": [
+        "transparent"
+      ]
+    },
+    "kbd": {
+      "categories": [
+        "flow",
+        "phrasing",
+        "palpable"
+      ],
+      "children": [
+        "phrasing"
+      ]
+    },
+    "label": {
+      "categories": [
+        "flow",
+        "phrasing",
+        "interactive",
+        "palpable"
+      ],
+      "children": [
+        "phrasing*"
+      ]
+    },
+    "legend": {
+      "categories": [
+        "none"
+      ],
+      "children": [
+        "phrasing*",
+        "heading content"
+      ]
+    },
+    "li": {
+      "categories": [
+        "none"
+      ],
+      "children": [
+        "flow"
+      ]
+    },
+    "link": {
+      "categories": [
+        "metadata",
+        "flow*",
+        "phrasing*"
+      ],
+      "children": [
+        "empty"
+      ]
+    },
+    "main": {
+      "categories": [
+        "flow",
+        "palpable"
+      ],
+      "children": [
+        "flow"
+      ]
+    },
+    "map": {
+      "categories": [
+        "flow",
+        "phrasing*",
+        "palpable"
+      ],
+      "children": [
+        "transparent",
+        "area*"
+      ]
+    },
+    "mark": {
+      "categories": [
+        "flow",
+        "phrasing",
+        "palpable"
+      ],
+      "children": [
+        "phrasing"
+      ]
+    },
+    "math": {
+      "categories": [
+        "flow",
+        "phrasing",
+        "embedded",
+        "palpable"
+      ],
+      "children": [
+        "per [MATHML]"
+      ]
+    },
+    "menu": {
+      "categories": [
+        "flow",
+        "palpable*"
+      ],
+      "children": [
+        "li",
+        "script-supporting elements"
+      ]
+    },
+    "meta": {
+      "categories": [
+        "metadata",
+        "flow*",
+        "phrasing*"
+      ],
+      "children": [
+        "empty"
+      ]
+    },
+    "meter": {
+      "categories": [
+        "flow",
+        "phrasing",
+        "labelable",
+        "palpable"
+      ],
+      "children": [
+        "phrasing*"
+      ]
+    },
+    "nav": {
+      "categories": [
+        "flow",
+        "sectioning",
+        "palpable"
+      ],
+      "children": [
+        "flow"
+      ]
+    },
+    "noscript": {
+      "categories": [
+        "metadata",
+        "flow",
+        "phrasing"
+      ],
+      "children": [
+        "varies*"
+      ]
+    },
+    "object": {
+      "categories": [
+        "flow",
+        "phrasing",
+        "embedded",
+        "interactive*",
+        "listed",
+        "form-associated",
+        "palpable"
+      ],
+      "children": [
+        "transparent"
+      ]
+    },
+    "ol": {
+      "categories": [
+        "flow",
+        "palpable*"
+      ],
+      "children": [
+        "li",
+        "script-supporting elements"
+      ]
+    },
+    "optgroup": {
+      "categories": [
+        "none"
+      ],
+      "children": [
+        "option*",
+        "script-supporting elements*",
+        "noscript*",
+        "div*",
+        "legend*"
+      ]
+    },
+    "option": {
+      "categories": [
+        "none"
+      ],
+      "children": [
+        "text*",
+        "div*",
+        "phrasing*"
+      ]
+    },
+    "output": {
+      "categories": [
+        "flow",
+        "phrasing",
+        "listed",
+        "labelable",
+        "resettable",
+        "form-associated",
+        "palpable"
+      ],
+      "children": [
+        "phrasing"
+      ]
+    },
+    "p": {
+      "categories": [
+        "flow",
+        "palpable"
+      ],
+      "children": [
+        "phrasing"
+      ]
+    },
+    "picture": {
+      "categories": [
+        "flow",
+        "phrasing",
+        "embedded",
+        "palpable"
+      ],
+      "children": [
+        "source*",
+        "one img",
+        "script-supporting elements"
+      ]
+    },
+    "pre": {
+      "categories": [
+        "flow",
+        "palpable"
+      ],
+      "children": [
+        "phrasing"
+      ]
+    },
+    "progress": {
+      "categories": [
+        "flow",
+        "phrasing",
+        "labelable",
+        "palpable"
+      ],
+      "children": [
+        "phrasing*"
+      ]
+    },
+    "q": {
+      "categories": [
+        "flow",
+        "phrasing",
+        "palpable"
+      ],
+      "children": [
+        "phrasing"
+      ]
+    },
+    "rp": {
+      "categories": [
+        "none"
+      ],
+      "children": [
+        "text"
+      ]
+    },
+    "rt": {
+      "categories": [
+        "none"
+      ],
+      "children": [
+        "phrasing"
+      ]
+    },
+    "ruby": {
+      "categories": [
+        "flow",
+        "phrasing",
+        "palpable"
+      ],
+      "children": [
+        "phrasing",
+        "rt",
+        "rp*"
+      ]
+    },
+    "s": {
+      "categories": [
+        "flow",
+        "phrasing",
+        "palpable"
+      ],
+      "children": [
+        "phrasing"
+      ]
+    },
+    "samp": {
+      "categories": [
+        "flow",
+        "phrasing",
+        "palpable"
+      ],
+      "children": [
+        "phrasing"
+      ]
+    },
+    "script": {
+      "categories": [
+        "metadata",
+        "flow",
+        "phrasing",
+        "script-supporting"
+      ],
+      "children": [
+        "script, data, or script documentation*"
+      ]
+    },
+    "search": {
+      "categories": [
+        "flow",
+        "palpable"
+      ],
+      "children": [
+        "flow"
+      ]
+    },
+    "section": {
+      "categories": [
+        "flow",
+        "sectioning",
+        "palpable"
+      ],
+      "children": [
+        "flow"
+      ]
+    },
+    "select": {
+      "categories": [
+        "flow",
+        "phrasing",
+        "interactive",
+        "listed",
+        "labelable",
+        "submittable",
+        "resettable",
+        "form-associated",
+        "palpable"
+      ],
+      "children": [
+        "option*",
+        "optgroup*",
+        "hr*",
+        "script-supporting elements*",
+        "noscript*",
+        "div*",
+        "button*"
+      ]
+    },
+    "selectedcontent": {
+      "categories": [
+        "none"
+      ],
+      "children": [
+        "empty"
+      ]
+    },
+    "slot": {
+      "categories": [
+        "flow",
+        "phrasing"
+      ],
+      "children": [
+        "transparent"
+      ]
+    },
+    "small": {
+      "categories": [
+        "flow",
+        "phrasing",
+        "palpable"
+      ],
+      "children": [
+        "phrasing"
+      ]
+    },
+    "source": {
+      "categories": [
+        "none"
+      ],
+      "children": [
+        "empty"
+      ]
+    },
+    "span": {
+      "categories": [
+        "flow",
+        "phrasing",
+        "palpable"
+      ],
+      "children": [
+        "phrasing"
+      ]
+    },
+    "strong": {
+      "categories": [
+        "flow",
+        "phrasing",
+        "palpable"
+      ],
+      "children": [
+        "phrasing"
+      ]
+    },
+    "style": {
+      "categories": [
+        "metadata"
+      ],
+      "children": [
+        "text*"
+      ]
+    },
+    "sub": {
+      "categories": [
+        "flow",
+        "phrasing",
+        "palpable"
+      ],
+      "children": [
+        "phrasing"
+      ]
+    },
+    "summary": {
+      "categories": [
+        "none"
+      ],
+      "children": [
+        "phrasing",
+        "heading content"
+      ]
+    },
+    "sup": {
+      "categories": [
+        "flow",
+        "phrasing",
+        "palpable"
+      ],
+      "children": [
+        "phrasing"
+      ]
+    },
+    "svg": {
+      "categories": [
+        "flow",
+        "phrasing",
+        "embedded",
+        "palpable"
+      ],
+      "children": [
+        "per [SVG]"
+      ]
+    },
+    "table": {
+      "categories": [
+        "flow",
+        "palpable"
+      ],
+      "children": [
+        "caption*",
+        "colgroup*",
+        "thead*",
+        "tbody*",
+        "tfoot*",
+        "tr*",
+        "script-supporting elements"
+      ]
+    },
+    "tbody": {
+      "categories": [
+        "none"
+      ],
+      "children": [
+        "tr",
+        "script-supporting elements"
+      ]
+    },
+    "td": {
+      "categories": [
+        "none"
+      ],
+      "children": [
+        "flow"
+      ]
+    },
+    "template": {
+      "categories": [
+        "metadata",
+        "flow",
+        "phrasing",
+        "script-supporting"
+      ],
+      "children": [
+        "empty"
+      ]
+    },
+    "textarea": {
+      "categories": [
+        "flow",
+        "phrasing",
+        "interactive",
+        "listed",
+        "labelable",
+        "submittable",
+        "resettable",
+        "form-associated",
+        "palpable"
+      ],
+      "children": [
+        "text"
+      ]
+    },
+    "tfoot": {
+      "categories": [
+        "none"
+      ],
+      "children": [
+        "tr",
+        "script-supporting elements"
+      ]
+    },
+    "th": {
+      "categories": [
+        "interactive*"
+      ],
+      "children": [
+        "flow*"
+      ]
+    },
+    "thead": {
+      "categories": [
+        "none"
+      ],
+      "children": [
+        "tr",
+        "script-supporting elements"
+      ]
+    },
+    "time": {
+      "categories": [
+        "flow",
+        "phrasing",
+        "palpable"
+      ],
+      "children": [
+        "phrasing"
+      ]
+    },
+    "title": {
+      "categories": [
+        "metadata"
+      ],
+      "children": [
+        "text*"
+      ]
+    },
+    "tr": {
+      "categories": [
+        "none"
+      ],
+      "children": [
+        "th*",
+        "td",
+        "script-supporting elements"
+      ]
+    },
+    "track": {
+      "categories": [
+        "none"
+      ],
+      "children": [
+        "empty"
+      ]
+    },
+    "u": {
+      "categories": [
+        "flow",
+        "phrasing",
+        "palpable"
+      ],
+      "children": [
+        "phrasing"
+      ]
+    },
+    "ul": {
+      "categories": [
+        "flow",
+        "palpable*"
+      ],
+      "children": [
+        "li",
+        "script-supporting elements"
+      ]
+    },
+    "var": {
+      "categories": [
+        "flow",
+        "phrasing",
+        "palpable"
+      ],
+      "children": [
+        "phrasing"
+      ]
+    },
+    "video": {
+      "categories": [
+        "flow",
+        "phrasing",
+        "embedded",
+        "interactive",
+        "palpable"
+      ],
+      "children": [
+        "source*",
+        "track*",
+        "transparent*"
+      ]
+    },
+    "wbr": {
+      "categories": [
+        "flow",
+        "phrasing"
+      ],
+      "children": [
+        "empty"
+      ]
+    }
+  }
+}
