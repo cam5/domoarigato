@@ -1,0 +1,21 @@
+# Nightshift project configuration
+#
+# Overrides the global config (~/.config/nightshift/config.yaml) for this repo.
+# The global task list is aimed at apps and services; this narrows it to what
+# is useful for a small, dependency-free PHP library.
+#
+# Nightshift only reads this file when it runs from the repo root or is pointed
+# here with `nightshift run -p <path>`; a multi-project run started elsewhere
+# uses the global task list for every project.
+
+tasks:
+  enabled:
+    - backward-compat            # public API breaks between releases
+    - docs-backfill              # missing docblocks / README sections
+    - doc-drift                  # README examples vs. actual behaviour
+    - dead-code                  # unused classes and methods
+    - dependency-risk            # composer dev dependencies
+    - security-footgun           # escaping / injection in rendered HTML
+    - test-gap                   # untested elements and attributes
+    - edge-case-enum             # odd attribute values, nesting, encodings
+    - error-msg-improve          # exception messages thrown to callers
