@@ -1,16 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Cam5\Domoarigato\tests;
 
 use Cam5\Domoarigato\Domo;
 use Cam5\Domoarigato\Elements\GenericElement;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
 /**
  * Test elements not explicitly supported by the library, eg. "GenericElement".
- *
- * @covers Cam5\Domoarigato\Elements\GenericElement
  */
+#[CoversClass(\Cam5\Domoarigato\Elements\GenericElement::class)]
 final class GenericElementTest extends TestCase
 {
 
@@ -26,7 +28,7 @@ final class GenericElementTest extends TestCase
      *
      * @return void
      */
-    public function setUp()
+    protected function setUp(): void
     {
         $this->el = Domo::createElement('general');
     }//end setUp()
@@ -34,7 +36,7 @@ final class GenericElementTest extends TestCase
     /**
      * Test that the Generic Element can be instantiated in different ways.
      */
-    public function testInstantiation()
+    public function testInstantiation(): void
     {
         // The factory produced the right class.
         $this->assertInstanceOf(

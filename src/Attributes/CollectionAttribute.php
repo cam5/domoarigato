@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Cam5\Domoarigato\Attributes;
 
 use Cam5\Domoarigato\Attributes\Traits as Traits;
@@ -16,21 +18,21 @@ class CollectionAttribute implements AttributeInterface
      *
      * @var array
      */
-    protected $values = [];
+    protected array $values = [];
 
     /**
      * Default value separator is a space, when rendered.
      *
      * @var string
      */
-    protected $separator = ' ';
+    protected string $separator = ' ';
 
     /**
      * Retrieves the values of the attribute.
      *
      * @return array
      */
-    public function getValues()
+    public function getValues(): array
     {
         return $this->values;
     }//end getValues()
@@ -38,11 +40,11 @@ class CollectionAttribute implements AttributeInterface
     /**
      * Passes single values onto main func.
      *
-     * @param mixed $val The value intended to be set on the array.
+     * @param string|array $val The value intended to be set on the array.
      *
      * @return self
      */
-    public function setValue($val)
+    public function setValue(string|array $val): static
     {
         $this->setValues($val);
 
@@ -52,19 +54,21 @@ class CollectionAttribute implements AttributeInterface
     /**
      * Sets many values at once, optionally overriding what came before.
      *
-     * @param mixed   $vals   The values intended to be set on the array.
-     * @param boolean $append Flag to add $vals to the end, or override all else.
+     * @param string|array $vals   The values intended to be set on the array.
+     * @param boolean      $append Flag to add $vals to the end, or override all else.
      *
      * @return self
      */
-    public function setValues($vals, $append = true)
+    public function setValues(string|array $vals, bool $append = true): static
     {
         if (false === $append) {
             $this->values = [];
         }
 
         if (true === is_array($vals)) {
-            array_walk($vals, [$this, 'addValue']);
+            foreach ($vals as $val) {
+                $this->addValue($val);
+            }
         } else {
             $this->addValue($vals);
         }
@@ -81,10 +85,10 @@ class CollectionAttribute implements AttributeInterface
      *
      * @return self
      */
-    public function addValue($val)
+    public function addValue(string $val): static
     {
-        if (false === array_search($val, $this->values)) {
-            $this->values[] = (string) $val;
+        if (false === array_search($val, $this->values, true)) {
+            $this->values[] = $val;
         }
 
         return $this;
@@ -97,9 +101,9 @@ class CollectionAttribute implements AttributeInterface
      *
      * @return self
      */
-    public function removeValue($val)
+    public function removeValue(string $val): static
     {
-        $index = array_search($val, $this->values);
+        $index = array_search($val, $this->values, true);
 
         if (false !== $index) {
             unset($this->values[$index]);
@@ -113,7 +117,7 @@ class CollectionAttribute implements AttributeInterface
      *
      * @return string
      */
-    public function render()
+    public function render(): string
     {
         return sprintf(
             '%s="%s"',

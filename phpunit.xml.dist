@@ -1,20 +1,26 @@
-<phpunit bootstrap="./vendor/autoload.php" colors="true" >
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
+         bootstrap="./vendor/autoload.php"
+         colors="true">
   <testsuites>
     <testsuite name="helloWorld">
       <directory>tests</directory>
     </testsuite>
   </testsuites>
-  <logging>
-    <log type="coverage-text" target="php://stdout" showUncoveredFiles="true"/>
-    <log type="coverage-clover" target="build/logs/clover.xml"/>
-  </logging>
 
-  <filter>
-    <whitelist processUncoveredFilesFromWhitelist="true">
+  <coverage>
+    <report>
+      <text outputFile="php://stdout" showUncoveredFiles="true"/>
+      <clover outputFile="build/logs/clover.xml"/>
+    </report>
+  </coverage>
+
+  <source>
+    <include>
       <directory suffix=".php">src</directory>
-      <exclude>
-        <directory>src/Enums</directory>
-      </exclude>
-    </whitelist>
-  </filter>
+    </include>
+    <exclude>
+      <directory>src/Enums</directory>
+    </exclude>
+  </source>
 </phpunit>

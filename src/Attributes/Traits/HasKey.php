@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Cam5\Domoarigato\Attributes\Traits;
 
 trait HasKey
@@ -10,7 +12,7 @@ trait HasKey
      *
      * @var string
      */
-    protected $key;
+    protected string $key = '';
 
     /**
      * Get the key of a given attribute.
@@ -19,7 +21,7 @@ trait HasKey
      *
      * @return string
      */
-    public function getKey()
+    public function getKey(): string
     {
         return $this->key;
     }//end getKey()
@@ -31,7 +33,7 @@ trait HasKey
      *
      * @return self
      */
-    public function setKey($string)
+    public function setKey(string $string): static
     {
         $this->key = $string;
 

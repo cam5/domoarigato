@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Cam5\Domoarigato\Elements;
 
 /**
@@ -13,21 +15,21 @@ abstract class EnclosingElement extends AbstractElement
      *
      * @var boolean
      */
-    protected $isSelfEnclosed = false;
+    protected bool $isSelfEnclosed = false;
 
     /**
      * The text content of the element.
      *
-     * @var string
+     * @var string|null
      */
-    protected $textContent;
+    protected ?string $textContent = null;
 
     /**
      * Retrieve the text content of the element.
      *
-     * @return string
+     * @return string|null
      */
-    public function getTextContent()
+    public function getTextContent(): ?string
     {
         return $this->textContent;
     }//end getTextContent()
@@ -39,7 +41,7 @@ abstract class EnclosingElement extends AbstractElement
      *
      * @return self
      */
-    public function setTextContent($string)
+    public function setTextContent(string $string): static
     {
         $this->textContent = $string;
 
@@ -51,7 +53,7 @@ abstract class EnclosingElement extends AbstractElement
      *
      * @return string
      */
-    public function render()
+    public function render(): string
     {
         return sprintf(
             '<%1$s%2$s>%3$s</%1$s>',

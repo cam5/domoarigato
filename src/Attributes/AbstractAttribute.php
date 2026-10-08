@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Cam5\Domoarigato\Attributes;
 
 /**
@@ -14,7 +16,7 @@ abstract class AbstractAttribute
      *
      * @return string
      */
-    abstract public function getKey();
+    abstract public function getKey(): string;
 
     /**
      * Set key for an attribute.
@@ -23,16 +25,16 @@ abstract class AbstractAttribute
      *
      * @return self
      */
-    abstract public function setKey($string);
+    abstract public function setKey(string $string): static;
 
     /**
      * Get the value of a given attribute.
      *
      * Ex: "lorem" in <div id="lorem"></div>.
      *
-     * @return string
+     * @return string|null
      */
-    abstract public function getValue();
+    abstract public function getValue(): ?string;
 
     /**
      * Set value for an attribute.
@@ -41,12 +43,12 @@ abstract class AbstractAttribute
      *
      * @return self
      */
-    abstract public function setValue($string);
+    abstract public function setValue(string $string): static;
 
     /**
      * Defines how the attribute is rendered into an HTML fragment.
      *
      * @return string
      */
-    abstract public function render();
+    abstract public function render(): string;
 }//end class

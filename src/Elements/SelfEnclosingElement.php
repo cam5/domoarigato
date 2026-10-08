@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Cam5\Domoarigato\Elements;
 
 /**
@@ -13,14 +15,14 @@ abstract class SelfEnclosingElement extends AbstractElement
      *
      * @var boolean
      */
-    protected $isSelfEnclosed = true;
+    protected bool $isSelfEnclosed = true;
 
     /**
      * Generates the HTML for the tag.
      *
      * @return string
      */
-    public function render()
+    public function render(): string
     {
         return sprintf(
             '<%1$s%2$s />',

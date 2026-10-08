@@ -1,9 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Cam5\Domoarigato\Elements;
 
 use Cam5\Domoarigato\Factories\AttributeFactory;
-use Cam5\Domoarigato\Attributes\SimpleAttribute;
 use Cam5\Domoarigato\Attributes\AttributeInterface;
 
 /**
@@ -17,23 +18,23 @@ abstract class AbstractElement
     /**
      * An array of attributes.
      *
-     * @var array
+     * @var AttributeInterface[]
      */
-    public $attributes = [];
+    public array $attributes = [];
 
     /**
      * Gets the name of the HTML tag.
      *
      * @return string
      */
-    abstract public function getTagName();
+    abstract public function getTagName(): string;
 
     /**
      * Output the tag's formatted HTML.
      *
      * @return string
      */
-    abstract public function render();
+    abstract public function render(): string;
 
     /**
      * Renders attributes for the tag.
@@ -42,7 +43,7 @@ abstract class AbstractElement
      *
      * @return string
      */
-    public function renderAttrs()
+    public function renderAttrs(): string
     {
         $html  = '';
         $attrs = $this->getAttributes();
@@ -63,7 +64,7 @@ abstract class AbstractElement
      *
      * @return string
      */
-    public function renderAttr(AttributeInterface $attribute)
+    public function renderAttr(AttributeInterface $attribute): string
     {
         return $attribute->render();
     }//end renderAttr()
@@ -71,9 +72,9 @@ abstract class AbstractElement
     /**
      * Get the attributes attached to this element.
      *
-     * @return array
+     * @return AttributeInterface[]
      */
-    public function getAttributes()
+    public function getAttributes(): array
     {
         return $this->attributes;
     }//end getAttributes()
@@ -86,7 +87,7 @@ abstract class AbstractElement
      *
      * @return self
      */
-    public function addAttribute($key, $value)
+    public function addAttribute(string $key, string $value): static
     {
         $attr = AttributeFactory::createFromName($key);
 

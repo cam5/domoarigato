@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Cam5\Domoarigato\Elements;
 
 interface ElementInterface
@@ -9,12 +11,12 @@ interface ElementInterface
      *
      * @return string
      */
-    public function getTagName();
+    public function getTagName(): string;
 
     /**
      * Output the tag's formatted HTML.
      *
      * @return string
      */
-    public function render();
+    public function render(): string;
 }//end interface

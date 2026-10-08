@@ -1,13 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Cam5\Domoarigato\tests;
 
 use Cam5\Domoarigato\Elements\Div;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\CoversTrait;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers Cam5\Domoarigato\Elements\Div
- */
+#[CoversClass(\Cam5\Domoarigato\Elements\Div::class)]
+#[CoversClass(\Cam5\Domoarigato\Factories\AttributeFactory::class)]
+#[CoversTrait(\Cam5\Domoarigato\Elements\Traits\BaseElement::class)]
 final class DivTest extends TestCase
 {
     /**
@@ -17,12 +21,12 @@ final class DivTest extends TestCase
      */
     public $div;
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->div = new Div();
     }
 
-    public function testRendersEmpty()
+    public function testRendersEmpty(): void
     {
         $this->assertEquals(
             '<div></div>',
@@ -30,7 +34,7 @@ final class DivTest extends TestCase
         );
     }
 
-    public function testRendersContentString()
+    public function testRendersContentString(): void
     {
         $this->div->setTextContent('Hello World');
 
@@ -40,10 +44,7 @@ final class DivTest extends TestCase
         );
     }
 
-    /**
-     * @covers Cam5\Domoarigato\Factories\AttributeFactory::createFromName
-     */
-    public function testAddingAttributes()
+    public function testAddingAttributes(): void
     {
         $this->div->addAttribute('id', 'lorem');
 
@@ -53,10 +54,7 @@ final class DivTest extends TestCase
         );
     }
 
-    /**
-     * @covers Cam5\Domoarigato\Elements\Traits\BaseElement::getTagName
-     */
-    public function testTagName()
+    public function testTagName(): void
     {
         $this->assertEquals(
             'div',

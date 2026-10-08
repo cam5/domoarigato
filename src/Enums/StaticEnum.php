@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Cam5\Domoarigato\Enums;
 
 /**
@@ -13,7 +15,7 @@ class StaticEnum
      *
      * @var array
      */
-    protected static $keys = [];
+    protected static array $keys = [];
 
     /**
      * Retrieves a given key from the enum, when present.
@@ -24,7 +26,7 @@ class StaticEnum
      *
      * @return string The value associated with that key.
      */
-    public static function get($string)
+    public static function get(string $string): string
     {
         if (true === self::contains($string)) {
             return static::$keys[$string];
@@ -40,8 +42,8 @@ class StaticEnum
      *
      * @return boolean
      */
-    public static function contains($string)
+    public static function contains(string $string): bool
     {
-        return key_exists($string, static::$keys);
+        return array_key_exists($string, static::$keys);
     }//end contains()
 }//end class

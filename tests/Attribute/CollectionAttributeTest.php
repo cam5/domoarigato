@@ -1,23 +1,32 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Cam5\Domoarigato\tests;
 
 use Cam5\Domoarigato\Attributes\CollectionAttribute;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
 /**
  * Tests `CollectionAttribute`
- *
- * @covers Cam5\Domoarigato\Attributes\CollectionAttribute
  */
+#[CoversClass(\Cam5\Domoarigato\Attributes\CollectionAttribute::class)]
 final class CollectionAttributeTest extends TestCase
 {
+    /**
+     * The attribute under test.
+     *
+     * @var CollectionAttribute
+     */
+    private CollectionAttribute $attr;
+
     /**
      * Sets up an element between each test.
      *
      * @return void
      */
-    public function setUp()
+    protected function setUp(): void
     {
         $this->attr = new CollectionAttribute();
         $this->attr->setKey('foo');
@@ -29,7 +38,7 @@ final class CollectionAttributeTest extends TestCase
      *
      * @return void
      */
-    public function testGetAndSetKeys()
+    public function testGetAndSetKeys(): void
     {
         $this->assertEquals(
             'foo',
@@ -42,7 +51,7 @@ final class CollectionAttributeTest extends TestCase
      *
      * @return void
      */
-    public function testAddSingularValues()
+    public function testAddSingularValues(): void
     {
         $this->attr->setValue('bar');
 
@@ -64,7 +73,7 @@ final class CollectionAttributeTest extends TestCase
      *
      * @return void
      */
-    public function testIdempotencyOfAddingValues()
+    public function testIdempotencyOfAddingValues(): void
     {
         $this->attr->addValue('ooga');
 
@@ -88,7 +97,7 @@ final class CollectionAttributeTest extends TestCase
      *
      * @return void
      */
-    public function testAddMultipleValues()
+    public function testAddMultipleValues(): void
     {
         $this->attr->setValues('boo');
         $this->attr->setValues('hoo');
@@ -105,7 +114,7 @@ final class CollectionAttributeTest extends TestCase
      *
      * @return void
      */
-    public function testAddMultipleValuesWithoutAppending()
+    public function testAddMultipleValuesWithoutAppending(): void
     {
         // Set many values at once.
         $this->attr->setKey('many')
@@ -123,7 +132,7 @@ final class CollectionAttributeTest extends TestCase
      *
      * @return void
      */
-    public function testRemoveValues()
+    public function testRemoveValues(): void
     {
         $this->attr->setKey('many')
             ->setValues(['multitude', 'myriad', 'mucho'], false);

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Cam5\Domoarigato\Attributes;
 
 use Cam5\Domoarigato\Attributes\Traits as Traits;
@@ -14,18 +16,18 @@ class SimpleAttribute implements AttributeInterface
     /**
      * The value of the attribute.
      *
-     * @var string
+     * @var string|null
      */
-    protected $value;
+    protected ?string $value = null;
 
     /**
      * Get the value of a given attribute.
      *
      * Ex: "lorem" in <div id="lorem"></div>.
      *
-     * @return string
+     * @return string|null
      */
-    public function getValue()
+    public function getValue(): ?string
     {
         return $this->value;
     }//end getValue()
@@ -37,7 +39,7 @@ class SimpleAttribute implements AttributeInterface
      *
      * @return self
      */
-    public function setValue($string)
+    public function setValue(string $string): static
     {
         $this->value = $string;
 
@@ -49,7 +51,7 @@ class SimpleAttribute implements AttributeInterface
      *
      * @return string
      */
-    public function render()
+    public function render(): string
     {
         return sprintf(
             '%s="%s"',

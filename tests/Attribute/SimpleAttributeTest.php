@@ -1,26 +1,25 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Cam5\Domoarigato\tests;
 
 use Cam5\Domoarigato\Attributes\SimpleAttribute;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
 /**
  * Tests `SimpleAttribute`
- *
- * @covers Cam5\Domoarigato\Attributes\SimpleAttribute
  */
+#[CoversClass(\Cam5\Domoarigato\Attributes\SimpleAttribute::class)]
 final class SimpleAttributeTest extends TestCase
 {
     /**
      * Tests the getters and setters of SimpleAttribute
      *
-     * @covers Cam5\Domoarigato\Attributes\SimpleAttribute::setKey()
-     * @covers Cam5\Domoarigato\Attributes\SimpleAttribute::getKey()
-     *
      * @return void
      */
-    public function testGetAndSetKeys()
+    public function testGetAndSetKeys(): void
     {
         $attr = new SimpleAttribute();
 
@@ -37,7 +36,7 @@ final class SimpleAttributeTest extends TestCase
      *
      * @return void
      */
-    public function testAttributeRender()
+    public function testAttributeRender(): void
     {
         $attr = new SimpleAttribute();
 
