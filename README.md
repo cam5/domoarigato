@@ -584,3 +584,29 @@ unknown
 
 Attributes outside the standard (`data-*`, `aria-*`, `x-data`, `hx-get`,
 anything of your own) are never rejected. They behave as plain key-value pairs.
+
+## How well is this tested?
+
+**Why you'd care:** a library whose whole job is writing markup safely is only
+worth using if its guarantees hold. Three gates run on every pull request,
+across PHP 8.2 to 8.5, and all three must be at 100%.
+
+- **Line coverage: 100%.** Every statement and method in `src/` is executed.
+- **Mutation score: 100%.** [Infection](https://infection.github.io/) rewrites
+  the source one small change at a time (flip a condition, drop a line, swap a
+  string) and checks that a test fails each time. Coverage shows the code ran;
+  this shows the tests would notice if it were wrong.
+- **Spec conformance.** The element and attribute registries are checked
+  against snapshots of the HTML Living Standard's own indices, so a missing
+  attribute or a mislabelled void element fails the build.
+
+And, as above, every example in this README is executed and compared with its
+printed output.
+
+To run them yourself (coverage and mutation testing need PCOV or Xdebug):
+
+```
+composer test       # the suite
+composer coverage   # the suite, then fail below 100% coverage
+composer mutate     # mutation testing, fail on any surviving mutant
+```

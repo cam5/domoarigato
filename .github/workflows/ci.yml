@@ -43,6 +43,9 @@ jobs:
       - name: Run tests
         run: vendor/bin/phpunit
 
+      - name: Require 100% line coverage
+        run: bin/check-coverage build/logs/clover.xml 100
+
       - name: Upload coverage to Coveralls
         uses: coverallsapp/github-action@v2
         with:
@@ -51,6 +54,26 @@ jobs:
           flag-name: php-${{ matrix.php }}
           parallel: true
           fail-on-error: false
+
+  mutation:
+    name: Mutation testing
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          coverage: pcov
+          tools: composer:v2
+
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-interaction --no-progress
+
+      # The thresholds (100% of mutants killed) live in infection.json5.
+      - name: Run Infection
+        run: vendor/bin/infection --threads=max --no-progress --show-mutations=max
 
   coverage:
     name: Finish coverage

@@ -1,0 +1,17 @@
+{
+    "$schema": "vendor/infection/infection/resources/schema.json",
+    "source": {
+        "directories": ["src"]
+    },
+    "logs": {
+        "text": "build/logs/infection.log"
+    },
+    "minMsi": 100,
+    "minCoveredMsi": 100,
+    "mutators": {
+        "@default": true,
+        // Protected methods are extension points for subclasses. Making one private can't be
+        // seen from outside unless a subclass in this library happens to override it.
+        "ProtectedVisibility": false
+    }
+}

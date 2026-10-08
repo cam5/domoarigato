@@ -190,7 +190,7 @@ final class ElementChildrenTest extends TestCase
         $div->append('a')->append(...['x' => 'b', 'y' => 'c'])->append('', '0');
 
         $this->assertSame('<div>abc0</div>', $div->render());
-        $this->assertCount(5, $div->getChildren());
+        $this->assertSame([0, 1, 2, 3, 4], array_keys($div->getChildren()));
     }//end testAppend()
 
     /**

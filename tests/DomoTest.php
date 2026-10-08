@@ -90,6 +90,14 @@ final class DomoTest extends TestCase
         );
     }
 
+    public function testContentKeysAreIgnored(): void
+    {
+        $el = Domo::createElement('div', [], ['x' => 'a', 'y' => 'b']);
+
+        $this->assertSame([0, 1], array_keys($el->getChildren()));
+        $this->assertSame('<div>ab</div>', $el->render());
+    }
+
     public function testNumericAttributeKeysAreStillNames(): void
     {
         $this->assertSame('<div 0="a" 1="b"></div>', Domo::createElement('div', ['a', 'b'])->render());

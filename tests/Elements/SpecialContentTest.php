@@ -135,6 +135,46 @@ final class SpecialContentTest extends TestCase
     }//end testRefusesContentThatEndsTheElement()
 
     /**
+     * Tests that the refusals say exactly what was wrong, and with which element.
+     *
+     * @return void
+     */
+    public function testRefusalsExplainThemselves(): void
+    {
+        $messages = [];
+
+        foreach ([['script', '</script>'], ['style', 'a{}</STYLE >'], ['script', '<!--<script>']] as [$name, $code]) {
+            try {
+                Domo::createElement($name)->setText($code);
+            } catch (\InvalidArgumentException $e) {
+                $messages[] = $e->getMessage();
+            }
+        }
+
+        $this->assertSame(
+            [
+                'That content cannot go inside of a "script" element: it contains "</script", which would end the element early.',
+                'That content cannot go inside of a "style" element: it contains "</style", which would end the element early.',
+                'That content cannot go inside of a "script" element: it contains both "<!--" and "<script", which would keep the element from ending.',
+            ],
+            $messages
+        );
+    }//end testRefusalsExplainThemselves()
+
+    /**
+     * Tests that the variadic `append` keeps children in a plain list, whatever keys it's spread from.
+     *
+     * @return void
+     */
+    public function testAppendIgnoresKeysOnRawTextElements(): void
+    {
+        $el = (new Script())->append(...['x' => 'a();', 'y' => 'b();']);
+
+        $this->assertSame([0, 1], array_keys($el->getChildren()));
+        $this->assertSame('<script>a();b();</script>', $el->render());
+    }//end testAppendIgnoresKeysOnRawTextElements()
+
+    /**
      * Tests that one element's closing tag is no trouble inside of the other.
      *
      * @return void

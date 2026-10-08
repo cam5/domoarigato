@@ -192,6 +192,13 @@ final class HtmlTest extends TestCase
         }
 
         try {
+            Html::normalizeTagName('a b');
+            $this->fail('A tag name with a space was accepted.');
+        } catch (\InvalidArgumentException $e) {
+            $this->assertSame('"a b" is not a valid tag name.', $e->getMessage());
+        }
+
+        try {
             Html::normalizeAttributeName('a b');
             $this->fail('A name with a space was accepted.');
         } catch (\InvalidArgumentException $e) {

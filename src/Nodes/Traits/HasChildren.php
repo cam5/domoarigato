@@ -151,7 +151,6 @@ trait HasChildren
      */
     public function setTextContent(string|int|float $string): static
     {
-        $string   = (string) $string;
         $children = [];
 
         if ('' !== $string) {

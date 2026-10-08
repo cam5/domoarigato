@@ -53,7 +53,7 @@ class Domo
             $content = [$content];
         }
 
-        return $element->append(...array_values($content));
+        return $element->append(...$content);
     }//end createElement()
 
     /**

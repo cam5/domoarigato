@@ -55,7 +55,7 @@ abstract class RawTextElement extends EnclosingElement
      */
     public function append(NodeInterface|string|int|float ...$children): static
     {
-        return $this->guard(fn () => parent::append(...array_values($children)));
+        return $this->guard(fn () => parent::append(...$children));
     }//end append()
 
     /**
@@ -121,7 +121,7 @@ abstract class RawTextElement extends EnclosingElement
      */
     protected function findProblem(string $content): ?string
     {
-        if (1 === preg_match('/<\/'.preg_quote($this->getTagName(), '/').'(?:[\t\n\f\r \/>]|$)/i', $content)) {
+        if (1 === preg_match('/<\/'.$this->getTagName().'(?:[\t\n\f\r \/>]|$)/i', $content)) {
             return 'contains "</'.$this->getTagName().'", which would end the element early';
         }
 
