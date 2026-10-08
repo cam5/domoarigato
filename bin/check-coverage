@@ -1,0 +1,54 @@
+#!/usr/bin/env php
+<?php
+
+declare(strict_types=1);
+
+/*
+ * Fails when a Clover report shows anything less than the required line coverage.
+ *
+ * Usage: bin/check-coverage [path/to/clover.xml] [minimum percentage]
+ */
+
+$file    = ($argv[1] ?? 'build/logs/clover.xml');
+$minimum = (float) ($argv[2] ?? 100);
+
+if (false === is_file($file)) {
+    fwrite(STDERR, 'No coverage report at "'.$file.'". Run the tests with a coverage driver first.'.PHP_EOL);
+    exit(2);
+}
+
+libxml_use_internal_errors(true);
+
+$report = simplexml_load_file($file);
+
+if (false === $report || false === isset($report->project->metrics)) {
+    fwrite(STDERR, '"'.$file.'" is not a Clover coverage report.'.PHP_EOL);
+    exit(2);
+}
+
+$metrics = $report->project->metrics;
+$total   = ((int) $metrics['statements'] + (int) $metrics['methods']);
+$covered = ((int) $metrics['coveredstatements'] + (int) $metrics['coveredmethods']);
+$percent = (0 === $total) ? 100.0 : (($covered / $total) * 100);
+
+printf(
+    'Coverage: %.2f%% (%d of %d statements, %d of %d methods). Required: %.2f%%.'.PHP_EOL,
+    $percent,
+    (int) $metrics['coveredstatements'],
+    (int) $metrics['statements'],
+    (int) $metrics['coveredmethods'],
+    (int) $metrics['methods'],
+    $minimum
+);
+
+if ($percent < $minimum) {
+    foreach ($report->xpath('//file') as $source) {
+        foreach ($source->line as $line) {
+            if ('0' === (string) $line['count']) {
+                fwrite(STDERR, '  not covered: '.$source['name'].':'.$line['num'].PHP_EOL);
+            }
+        }
+    }
+
+    exit(1);
+}

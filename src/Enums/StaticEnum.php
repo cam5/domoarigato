@@ -28,15 +28,27 @@ class StaticEnum
      */
     public static function get(string $string): string
     {
-        if (true === self::contains($string)) {
-            return static::$keys[$string];
+        if (true === static::contains($string)) {
+            return static::$keys[strtolower($string)];
         }
 
-        throw new \LogicException('Could not find "'.$string.'" key in '.self::class.' enum.');
+        throw new \LogicException('Could not find "'.$string.'" key in '.static::class.' enum.');
     }//end get()
 
     /**
+     * Retrieves every key in the enum, along with its value.
+     *
+     * @return array
+     */
+    public static function all(): array
+    {
+        return static::$keys;
+    }//end all()
+
+    /**
      * Checks that a given key is in the set.
+     *
+     * HTML names are case-insensitive, and so is the lookup.
      *
      * @param string $string The key we're searching for in the enum.
      *
@@ -44,6 +56,6 @@ class StaticEnum
      */
     public static function contains(string $string): bool
     {
-        return array_key_exists($string, static::$keys);
+        return array_key_exists(strtolower($string), static::$keys);
     }//end contains()
 }//end class

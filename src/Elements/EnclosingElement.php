@@ -4,11 +4,15 @@ declare(strict_types=1);
 
 namespace Cam5\Domoarigato\Elements;
 
+use Cam5\Domoarigato\Nodes\ParentNodeInterface;
+use Cam5\Domoarigato\Nodes\Traits\HasChildren;
+
 /**
- * Extends the tag-only representation of an HTML element further by defining that it encloses text.
+ * Extends the tag-only representation of an HTML element further by defining that it encloses content.
  */
-abstract class EnclosingElement extends AbstractElement
+abstract class EnclosingElement extends AbstractElement implements ParentNodeInterface
 {
+    use HasChildren;
 
     /**
      * Flag to indicate if the tag is self-enclosed or not.
@@ -18,35 +22,16 @@ abstract class EnclosingElement extends AbstractElement
     protected bool $isSelfEnclosed = false;
 
     /**
-     * The text content of the element.
+     * Gives a cloned element attributes and children of its own.
      *
-     * @var string|null
+     * @return void
      */
-    protected ?string $textContent = null;
-
-    /**
-     * Retrieve the text content of the element.
-     *
-     * @return string|null
-     */
-    public function getTextContent(): ?string
+    public function __clone()
     {
-        return $this->textContent;
-    }//end getTextContent()
+        parent::__clone();
 
-    /**
-     * Set the content of the element.
-     *
-     * @param string $string The text content.
-     *
-     * @return self
-     */
-    public function setTextContent(string $string): static
-    {
-        $this->textContent = $string;
-
-        return $this;
-    }//end setTextContent()
+        $this->cloneChildren();
+    }//end __clone()
 
     /**
      * Generates the HTML for the tag.
@@ -59,7 +44,17 @@ abstract class EnclosingElement extends AbstractElement
             '<%1$s%2$s>%3$s</%1$s>',
             $this->getTagName(),
             $this->renderAttrs(),
-            $this->getTextContent()
+            $this->renderContent()
         );
     }//end render()
+
+    /**
+     * Generates the HTML that goes between the element's tags.
+     *
+     * @return string
+     */
+    protected function renderContent(): string
+    {
+        return $this->getInnerHtml();
+    }//end renderContent()
 }//end class

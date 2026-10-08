@@ -18,6 +18,16 @@ abstract class SelfEnclosingElement extends AbstractElement
     protected bool $isSelfEnclosed = true;
 
     /**
+     * Nothing can go inside a self-enclosing element, text included.
+     *
+     * @return string
+     */
+    public function getTextContent(): string
+    {
+        return '';
+    }//end getTextContent()
+
+    /**
      * Generates the HTML for the tag.
      *
      * @return string

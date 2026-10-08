@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Cam5\Domoarigato\Elements;
 
+use Cam5\Domoarigato\Support\Html;
+
 /**
  * A generic HTML element.
  */
@@ -21,10 +23,12 @@ class GenericElement extends EnclosingElement implements ElementInterface
      * Constructor
      *
      * @param string $tagName The name of the element.
+     *
+     * @throws \InvalidArgumentException When the name could not be written as a tag.
      */
     public function __construct(string $tagName)
     {
-        $this->tagName = $tagName;
+        $this->tagName = Html::normalizeTagName($tagName);
     }//end __construct()
 
     /**

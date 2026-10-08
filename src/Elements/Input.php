@@ -15,4 +15,3 @@ class Input extends SelfEnclosingElement implements ElementInterface
 
     const TAG_NAME = 'input';
 }//end class
-
