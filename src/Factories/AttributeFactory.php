@@ -22,6 +22,8 @@ class AttributeFactory
      *
      * @param string $name The name of attribute key.
      *
+     * @throws \InvalidArgumentException When the name is not a valid attribute name.
+     *
      * @return AttributeInterface
      */
     public static function createFromName(string $name): AttributeInterface
