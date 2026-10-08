@@ -9,6 +9,7 @@ use Cam5\Domoarigato\Attributes\CollectionAttribute;
 use Cam5\Domoarigato\Enums\Attributes;
 use Cam5\Domoarigato\Factories\AttributeFactory;
 use Cam5\Domoarigato\Nodes\Traits\CastsToString;
+use Cam5\Domoarigato\Validation\Traits\Validates;
 
 /**
  * An abstract representation of an HTML element.
@@ -18,6 +19,7 @@ use Cam5\Domoarigato\Nodes\Traits\CastsToString;
 abstract class AbstractElement
 {
     use CastsToString;
+    use Validates;
 
     /**
      * An array of attributes.
@@ -36,9 +38,13 @@ abstract class AbstractElement
     /**
      * Output the tag's formatted HTML.
      *
+     * @param boolean $validate Whether to check the content against HTML's rules before rendering it.
+     *
+     * @throws \Cam5\Domoarigato\Validation\InvalidContentException When asked to validate, and the content isn't valid.
+     *
      * @return string
      */
-    abstract public function render(): string;
+    abstract public function render(bool $validate = false): string;
 
     /**
      * Gives a cloned element attributes of its own, so changing one copy leaves the other alone.

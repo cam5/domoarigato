@@ -24,9 +24,9 @@ class StaticEnum
      *
      * @throws \LogicException When a key outside the defined set is used.
      *
-     * @return string The value associated with that key.
+     * @return mixed The value associated with that key.
      */
-    public static function get(string $string): string
+    public static function get(string $string): mixed
     {
         if (true === static::contains($string)) {
             return static::$keys[strtolower($string)];

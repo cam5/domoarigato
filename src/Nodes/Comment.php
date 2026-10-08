@@ -63,9 +63,11 @@ class Comment implements NodeInterface
     /**
      * Output the comment.
      *
+     * @param boolean $validate Makes no difference here: on its own, there is nothing about this node to check.
+     *
      * @return string
      */
-    public function render(): string
+    public function render(bool $validate = false): string
     {
         return '<!--'.$this->text.'-->';
     }//end render()
