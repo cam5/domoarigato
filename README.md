@@ -23,7 +23,13 @@ echo $div->render();
 <div id="foo" class="bar">baz</div>
 ```
 
-Requires PHP 8.2 or newer.
+## Install
+
+```
+composer require cam5/domoarigato
+```
+
+Requires PHP 8.2 or newer, and nothing else: there are no runtime dependencies.
 
 Every example in this file is run by the test suite, and its output compared
 with the block that follows it. If the README says it, the code does it.
@@ -834,3 +840,14 @@ composer test       # the suite
 composer coverage   # the suite, then fail below 100% coverage
 composer mutate     # mutation testing, fail on any surviving mutant
 ```
+
+## License
+
+Domoarigato is free software, released under the
+[GNU General Public License](LICENSE), version 3 or (at your option) any later
+version.
+
+In practice: use it on your own servers for anything you like, with no
+obligations. If you *distribute* software that includes it, such as a plugin, a
+theme or a self-hosted application, that software has to be offered under the
+GPL as well.
