@@ -44,7 +44,17 @@ abstract class EnclosingElement extends AbstractElement implements ParentNodeInt
             '<%1$s%2$s>%3$s</%1$s>',
             $this->getTagName(),
             $this->renderAttrs(),
-            $this->getInnerHtml()
+            $this->renderContent()
         );
     }//end render()
+
+    /**
+     * Generates the HTML that goes between the element's tags.
+     *
+     * @return string
+     */
+    protected function renderContent(): string
+    {
+        return $this->getInnerHtml();
+    }//end renderContent()
 }//end class

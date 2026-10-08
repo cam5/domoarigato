@@ -352,7 +352,7 @@ final class AttributesTest extends TestCase
             Domo::createElement('output')->addAttribute('for', 'a b')->render()
         );
         $this->assertSame(
-            '<img sizes="(max-width: 600px) 480px, 800px"></img>',
+            '<img sizes="(max-width: 600px) 480px, 800px" />',
             Domo::createElement('img')->addAttribute('sizes', '(max-width: 600px) 480px, 800px')->render()
         );
     }//end testAmbiguousAttributesAreSimple()

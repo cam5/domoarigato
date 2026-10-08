@@ -186,6 +186,151 @@ try {
 A node cannot be placed inside of itself.
 ```
 
+## Every HTML element, each with its own rules
+
+**Why you'd want it:** not every tag is `<name>...</name>`. Thirteen elements
+must never have a closing tag, `<script>` and `<style>` must never be escaped,
+and `<textarea>` quietly eats a leading newline. `Domo::createElement()` knows
+all 115 elements in the
+[HTML Living Standard](https://html.spec.whatwg.org/multipage/indices.html#elements-3)
+and writes each one the way a browser expects to read it.
+
+### Void elements never get a closing tag
+
+`<br></br>` is two line breaks in a browser. The void elements (`area`, `base`,
+`br`, `col`, `embed`, `hr`, `img`, `input`, `link`, `meta`, `source`, `track`,
+`wbr`) render self-closed, and refuse content instead of silently dropping it.
+
+```php
+use Cam5\Domoarigato\Domo;
+
+echo Domo::createElement('img', ['src' => 'cat.jpg', 'alt' => 'A cat']), "\n";
+echo Domo::createElement('p', [], ['one', Domo::createElement('br'), 'two']), "\n";
+
+try {
+    Domo::createElement('br', [], 'text');
+} catch (InvalidArgumentException $e) {
+    echo $e->getMessage();
+}
+```
+
+```html
+<img src="cat.jpg" alt="A cat" />
+<p>one<br />two</p>
+A "br" element cannot have anything inside of it.
+```
+
+### Scripts and styles are written verbatim, and cannot be broken out of
+
+Escaping `a < b` inside a `<script>` would break the code, so these two
+elements write their content exactly as given. What they will not do is accept
+content that ends the element early, which is the classic way user data
+embedded in a script turns into an XSS hole.
+
+```php
+use Cam5\Domoarigato\Domo;
+
+echo Domo::createElement('script', [], 'if (a < b && c > d) { go(); }'), "\n";
+echo Domo::createElement('style', [], 'ul > li { color: red; }'), "\n";
+
+$userInput = '</script><script>alert("gotcha")</script>';
+
+try {
+    Domo::createElement('script', [], 'var name = "'.$userInput.'";');
+} catch (InvalidArgumentException $e) {
+    echo $e->getMessage(), "\n";
+}
+
+// The right way to hand data to a script: JSON, with JSON_HEX_TAG.
+echo Domo::createElement('script', ['type' => 'application/json'], json_encode(['name' => $userInput], JSON_HEX_TAG));
+```
+
+```html
+<script>if (a < b && c > d) { go(); }</script>
+<style>ul > li { color: red; }</style>
+That content cannot go inside of a "script" element: it contains "</script", which would end the element early.
+<script type="application/json">{"name":"\u003C\/script\u003E\u003Cscript\u003Ealert(\"gotcha\")\u003C\/script\u003E"}</script>
+```
+
+The check looks at the whole content, so a closing tag cannot be assembled from
+harmless pieces across several `appendChild()` calls. Scripts also refuse the
+`<!--` plus `<script` combination, which makes a browser ignore the real
+closing tag.
+
+### `<title>` and `<textarea>` hold text only
+
+A browser does not read tags inside these, so the library does not let you put
+any there. Text is escaped as usual, which keeps a saved form value from
+closing its own `<textarea>`.
+
+```php
+use Cam5\Domoarigato\Domo;
+
+$saved = 'Thanks!</textarea><script>alert(1)</script>';
+
+echo Domo::createElement('textarea', ['name' => 'bio'], $saved), "\n";
+
+try {
+    Domo::createElement('title')->appendChild(Domo::createElement('b', [], 'Home'));
+} catch (InvalidArgumentException $e) {
+    echo $e->getMessage();
+}
+```
+
+```html
+<textarea name="bio">Thanks!&lt;/textarea&gt;&lt;script&gt;alert(1)&lt;/script&gt;</textarea>
+A "title" element can only contain text.
+```
+
+### Leading newlines survive in `<pre>` and `<textarea>`
+
+Browsers discard a newline that comes straight after `<pre>` or `<textarea>`.
+If your content really starts with one, an extra newline is written so that
+what the user sees (and submits back) is what you stored.
+
+```php
+use Cam5\Domoarigato\Domo;
+
+$stored = "\nSecond line of the field";
+
+echo json_encode(Domo::createElement('textarea', [], $stored)->render());
+```
+
+```html
+"<textarea>\n\nSecond line of the field<\/textarea>"
+```
+
+### A class and a constant for each element
+
+Each element has its own class, so you can type-hint and `instanceof` against
+them, and a constant on `Enums\Elements`. Names that are not standard HTML
+(custom elements, the insides of an `<svg>`) still work as generic elements.
+
+```php
+use Cam5\Domoarigato\Domo;
+use Cam5\Domoarigato\Elements\Img;
+use Cam5\Domoarigato\Elements\GenericElement;
+use Cam5\Domoarigato\Elements\SelfEnclosingElement;
+use Cam5\Domoarigato\Enums\Elements;
+
+$img    = Domo::createElement(Elements::IMG);
+$widget = Domo::createElement('user-card', ['name' => 'Ada'], 'Loading');
+
+echo $img instanceof Img ? 'Img' : 'other', "\n";
+echo $img instanceof SelfEnclosingElement ? 'void' : 'not void', "\n";
+echo $widget instanceof GenericElement ? 'generic' : 'known', "\n";
+echo $widget, "\n";
+echo count(Elements::all()), ' elements';
+```
+
+```html
+Img
+void
+generic
+<user-card name="Ada">Loading</user-card>
+115 elements
+```
+
 ## Attributes
 
 **Why you'd want it:** attributes are where hand-written HTML strings go wrong.

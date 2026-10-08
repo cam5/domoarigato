@@ -7,11 +7,11 @@ namespace Cam5\Domoarigato\Elements;
 use Cam5\Domoarigato\Elements\Traits as Traits;
 
 /**
- * Represents the HTML <input /> tag
+ * Represents the HTML <menu> tag
  */
-class Input extends SelfEnclosingElement implements ElementInterface
+class Menu extends EnclosingElement implements ElementInterface
 {
     use Traits\BaseElement;
 
-    const TAG_NAME = 'input';
+    const TAG_NAME = 'menu';
 }//end class

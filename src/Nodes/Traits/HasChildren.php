@@ -151,13 +151,14 @@ trait HasChildren
      */
     public function setTextContent(string|int|float $string): static
     {
-        $string = (string) $string;
-
-        $this->children = [];
+        $string   = (string) $string;
+        $children = [];
 
         if ('' !== $string) {
-            $this->children[] = new Text($string);
+            $children[] = $this->toNode($string);
         }
+
+        $this->children = $children;
 
         return $this;
     }//end setTextContent()
@@ -197,15 +198,19 @@ trait HasChildren
      *
      * @param string $html The markup.
      *
+     * @throws \InvalidArgumentException When this node can't hold markup.
+     *
      * @return self
      */
     public function setInnerHtml(string $html): static
     {
-        $this->children = [];
+        $children = [];
 
         if ('' !== $html) {
-            $this->children[] = new RawHtml($html);
+            $children[] = $this->toNode(new RawHtml($html));
         }
+
+        $this->children = $children;
 
         return $this;
     }//end setInnerHtml()

@@ -15,4 +15,3 @@ class Div extends EnclosingElement implements ElementInterface
 
     const TAG_NAME = 'div';
 }//end class
-
