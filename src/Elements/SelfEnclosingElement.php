@@ -30,9 +30,11 @@ abstract class SelfEnclosingElement extends AbstractElement
     /**
      * Generates the HTML for the tag.
      *
+     * @param boolean $validate Makes no difference here: with nothing inside, there is nothing to check.
+     *
      * @return string
      */
-    public function render(): string
+    public function render(bool $validate = false): string
     {
         return sprintf(
             '<%1$s%2$s />',

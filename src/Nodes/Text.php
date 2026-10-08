@@ -43,9 +43,11 @@ class Text implements NodeInterface
     /**
      * Output the text, escaped for use in HTML.
      *
+     * @param boolean $validate Makes no difference here: on its own, there is nothing about this node to check.
+     *
      * @return string
      */
-    public function render(): string
+    public function render(bool $validate = false): string
     {
         return Html::escapeText($this->text);
     }//end render()

@@ -389,6 +389,98 @@ title: #text
 br: (nothing)
 ```
 
+### Find the mistakes in a tree
+
+`validate()` walks an element (or fragment) and everything inside it, and
+returns one `Violation` per problem: what is wrong, where, and what would have
+been allowed. An empty array means the markup is sound.
+
+```php
+use Cam5\Domoarigato\Domo;
+
+$list = Domo::createElement('ul', [], [
+    Domo::createElement('li', [], 'Fine'),
+    Domo::createElement('p', [], 'A paragraph is not a list item'),
+    'Loose text',
+]);
+
+foreach ($list->validate() as $violation) {
+    echo $violation->getPath(), "\n  ", $violation->getMessage(), "\n";
+}
+```
+
+```html
+ul > p
+  <p> is not allowed directly inside of <ul>. Allowed there: <li>, script-supporting elements.
+ul > (text)
+  Text is not allowed directly inside of <ul>. Allowed there: <li>, script-supporting elements.
+```
+
+Each `Violation` also carries the offending node (`getNode()`), so tooling can
+point at it or remove it.
+
+### Or refuse to render invalid markup
+
+Pass `true` to `render()` and the tree is checked first. Invalid content throws
+an `InvalidContentException` listing every problem, instead of sending markup
+to the browser that it will silently restructure. Turn it on in development and
+in your tests, and leave it off in production if you would rather not pay for
+the check on every request.
+
+```php
+use Cam5\Domoarigato\Domo;
+use Cam5\Domoarigato\Validation\InvalidContentException;
+
+$teaser = Domo::createElement('p', [], [
+    'Read more: ',
+    Domo::createElement('a', ['href' => '/post'], Domo::createElement('div', [], 'The post')),
+]);
+
+echo $teaser->render(), "\n";
+
+try {
+    echo $teaser->render(true);
+} catch (InvalidContentException $e) {
+    echo $e->getMessage(), "\n";
+    echo count($e->getViolations()), ' violation';
+}
+```
+
+```html
+<p>Read more: <a href="/post"><div>The post</div></a></p>
+The content is not valid HTML:
+  - p > a > div: <div> is not allowed directly inside of <a>. Allowed there: phrasing content.
+1 violation
+```
+
+That example shows the part that is hard to keep in your head: an `<a>` is
+*transparent*, so what it may contain depends on where it sits. The same link
+around a `<div>` is fine inside a `<section>`. The validator follows the chain
+of transparent elements (`a`, `ins`, `del`, `map`, `video`, custom elements
+and so on) up to the nearest ancestor that settles it.
+
+```php
+use Cam5\Domoarigato\Domo;
+
+$link = fn () => Domo::createElement('a', ['href' => '/post'], Domo::createElement('div', [], 'The post'));
+
+echo count(Domo::createElement('section', [], $link())->validate()), ' in a section', "\n";
+echo count(Domo::createElement('p', [], $link())->validate()), ' in a paragraph', "\n";
+echo count($link()->validate()), ' on its own';
+```
+
+```html
+0 in a section
+1 in a paragraph
+0 on its own
+```
+
+What is checked is whether each node may be a direct child of its parent.
+Three things are deliberately left alone: markup passed in as a string
+(`setInnerHtml()`, `Domo::raw()`), which is not parsed; the insides of `<svg>`,
+`<math>` and `<template>`, where HTML's rules do not apply; and an element with
+no parent to judge it by, such as the root of the tree you are validating.
+
 ## Attributes
 
 **Why you'd want it:** attributes are where hand-written HTML strings go wrong.

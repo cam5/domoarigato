@@ -43,9 +43,11 @@ class RawHtml implements NodeInterface
     /**
      * Output the markup, untouched.
      *
+     * @param boolean $validate Makes no difference here: on its own, there is nothing about this node to check.
+     *
      * @return string
      */
-    public function render(): string
+    public function render(bool $validate = false): string
     {
         return $this->html;
     }//end render()

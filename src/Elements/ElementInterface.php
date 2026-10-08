@@ -63,9 +63,20 @@ interface ElementInterface extends NodeInterface
     public function removeAttribute(string $key): static;
 
     /**
+     * Finds everything in this element, and inside of it, that breaks HTML's content rules.
+     *
+     * @return \Cam5\Domoarigato\Validation\Violation[] Empty when everything is in order.
+     */
+    public function validate(): array;
+
+    /**
      * Output the tag's formatted HTML.
+     *
+     * @param boolean $validate Whether to check the content against HTML's rules before rendering it.
+     *
+     * @throws \Cam5\Domoarigato\Validation\InvalidContentException When asked to validate, and the content isn't valid.
      *
      * @return string
      */
-    public function render(): string;
+    public function render(bool $validate = false): string;
 }//end interface
